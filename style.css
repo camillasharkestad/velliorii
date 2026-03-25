@@ -1,0 +1,358 @@
+body {
+  margin: 0;
+  font-family: Arial, sans-serif;
+  background-color: #f7f2eb;
+  color: #2f2a26;
+}
+
+.top-line {
+  background-color: #ffffff;
+  color: #2f2a26;
+  text-align: center;
+  padding: 12px;
+
+  font-family: "Montserrat", sans-serif;
+  font-weight: 600;
+  letter-spacing: 4px;
+  font-size: 18px;
+}
+
+.top-line {
+  position: sticky;
+  top: 0;
+  z-index: 1001;
+}
+
+.navbar {
+  position: sticky;
+  top: 44px; /* høyden på top-line */
+  z-index: 1000;
+}
+
+.navbar {
+  background-color: #eee6dc;
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  padding: 18px;
+  flex-wrap: wrap;
+}
+
+.navbar a {
+  text-decoration: none;
+  color: #2f2a26;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  letter-spacing: 1px;
+}
+
+.navbar a:hover {
+  text-decoration: underline;
+}
+
+.hero {
+  height: 500px;
+  background-image: url("Images/smykker-banner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+}
+
+/* PRODUKTER */
+.products {
+  padding: 50px 30px;
+  max-width: 1400px;
+  margin: auto;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+}
+
+.products h2,
+.sub-title,
+.product-card h3,
+.product-card p,
+.product-card.simple h3,
+.product-card.simple p {
+  letter-spacing: 1px;
+  font-weight: 300;
+}
+
+.products h2 {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.sub-title {
+  text-align: center;
+  margin: 60px 0 25px;
+}
+
+/* GRID */
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
+
+/* PRODUKTKORT */
+.product-card {
+  background-color: rgba(234, 223, 206, 0.7); /* 👈 gjennomsiktig beige */
+  border-radius: 12px;
+  overflow: hidden;
+  text-decoration: none;
+  color: #2f2a26;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.image-wrapper {
+  position: relative;
+}
+
+.image-wrapper img {
+  width: 100%;
+  height: 260px;
+  object-fit: cover;
+  display: block;
+}
+
+.hover-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  opacity: 0;
+  transition: opacity 0.3s ease;
+}
+
+.product-card:hover .hover-img {
+  opacity: 1;
+}
+
+.product-card:hover .main-img {
+  opacity: 0;
+}
+
+.product-card h3 {
+  margin: 16px 16px 8px;
+}
+
+.product-card p {
+  margin: 0 16px 20px;
+}
+
+.product-card:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* NEDERSTE PRODUKTER */
+.product-grid-5 {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+  gap: 20px;
+}
+
+.product-card.simple {
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  text-align: center;
+  overflow: visible;
+}
+
+.product-card.simple img {
+  width: 100%;
+  height: 220px;
+  object-fit: cover;
+  display: block;
+}
+
+.product-card.simple h3 {
+  margin: 12px 0 8px;
+  font-size: 16px;
+}
+
+.product-card.simple p {
+  margin: 0 0 10px;
+  font-size: 14px;
+}
+
+.product-card.simple:hover {
+  transform: translateY(-6px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+}
+
+/* FOOTER */
+.footer {
+  background-color: #eee6dc;
+  text-align: center;
+  padding: 25px;
+  margin-top: 40px;
+}
+
+/* RESPONSIVE */
+@media (max-width: 1100px) {
+  .product-grid-5 {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 900px) {
+  .product-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .product-grid-5 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .hero {
+    height: 380px;
+    background-attachment: scroll;
+  }
+}
+
+@media (max-width: 600px) {
+  .product-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .product-grid-5 {
+    grid-template-columns: 1fr;
+  }
+
+  .hero {
+    height: 260px;
+    background-attachment: scroll;
+  }
+}
+.product-card {
+  text-align: center;
+}
+.large-images {
+  display: flex;
+  gap: 3px;
+  padding: 40px;
+}
+
+.large-images {
+  display: flex;
+  gap: 0;
+}
+
+.large-images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr); /* 2 per rad */
+  gap: 3px;
+  padding: 40px;
+}
+
+.large-images img {
+  width: 100%;
+  height: 800px; /* juster høyde hvis du vil */
+  object-fit: cover;
+  display: block;
+}
+.inspirasjon {
+  padding: 40px 0;
+  background-color: #f7f2eb;
+}
+
+.inspirasjon-tekst {
+  text-align: center;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 300;
+  font-size: 16px;
+  margin-bottom: 30px;
+  color: #2f2a26;
+}
+
+.inspirasjon-wrapper {
+  position: relative;
+  max-width: 1400px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+
+.inspirasjon-gallery {
+  display: flex;
+  gap: 20px;
+  overflow-x: auto;
+  scroll-behavior: smooth;
+  scrollbar-width: none;
+}
+
+.inspirasjon-gallery::-webkit-scrollbar {
+  display: none;
+}
+
+.inspirasjon-gallery img {
+  flex: 0 0 calc((100% - 60px) / 4);
+  height: 420px;
+  object-fit: cover;
+  display: block;
+}
+
+.carousel-btn {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  font-size: 42px;
+  cursor: pointer;
+  color: #2f2a26;
+  z-index: 10;
+}
+
+.carousel-btn.left {
+  left: 0;
+}
+
+.carousel-btn.right {
+  right: 0;
+}
+.large-images {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 3px;
+  padding: 40px;
+}
+
+.large-image-card {
+  position: relative;
+}
+
+.large-image-card img {
+  width: 100%;
+  height: 800px;
+  object-fit: cover;
+  display: block;
+}
+
+.large-image-button {
+  position: absolute;
+  bottom: 30px;
+  left: 30px;
+  background-color: rgba(255, 255, 255, 0.9);
+  color: #2f2a26;
+  text-decoration: none;
+  padding: 12px 20px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 14px;
+  letter-spacing: 1px;
+  border-radius: 4px;
+  transition: background-color 0.3s ease;
+}
+
+.large-image-button:hover {
+  background-color: #eee6dc;
+}
+.all-products-grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 25px;
+}
