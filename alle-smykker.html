@@ -11,19 +11,31 @@
     />
   </head>
   <body>
-    <div class="top-line">VELIORII</div>
+    <div class="top-line">
+  <a href="index.html">VELIORII</a>
+</div>
 
     <nav class="navbar">
-      <a href="index.html">Forside</a>
-      <a href="alle-smykker.html">Se alle våre smykker</a>
-      <a href="#">Salg</a>
-      <a href="kontakt.html">Kontakt oss</a>
-    </nav>
+  <div class="nav-left">
+    <a href="index.html">Forside</a>
+    <a href="alle-smykker.html">Se alle våre smykker</a>
+    <a href="#">Salg</a>
+    <a href="kontakt.html">Kontakt oss</a>
+  </div>
 
-    <section class="products">
+  <div class="nav-right">
+    <a href="handlekurv.html" class="cart-link">
+      🛒 <span id="cart-count">0</span>
+    </a>
+  </div>
+</nav>
+
+    <section class="products all-products-page">
       <h2>ALLE VÅRE SMYKKER</h2>
 
       <div class="all-products-grid">
+        <!-- LEGG NYE PRODUKTER INN HER -->
+
         <a href="#" class="product-card simple">
           <img src="Images/Runde22.jpg" alt="Anello Classico" />
           <h3>Anello Classico</h3>
@@ -43,7 +55,10 @@
         </a>
 
         <a href="#" class="product-card simple">
-          <img src="Images/oreringer-gull-beige-hvit-plain.jpg" alt="Stella ring" />
+          <img
+            src="Images/lys-gull-perlering.jpg"
+            alt="Stella ring"
+          />
           <h3>Stella ring</h3>
           <p>Se mer</p>
         </a>
@@ -72,6 +87,14 @@
           <p>Se mer</p>
         </a>
 
+         <!-- ØREDOBBER -->
+  <a href="#" class="product-card simple">
+          <img src="Images/gull-oreringer-plain.jpg" alt="Øredobber" />
+          <h3>Seila øreringer</h3>
+          <p>Se mer</p>
+        </a>
+
+
         <a href="#" class="product-card simple">
           <img src="Images/produkt4.jpg" alt="Øredobber" />
           <h3>Øredobber</h3>
@@ -79,6 +102,19 @@
         </a>
       </div>
     </section>
+    <script>
+  function updateCartCount() {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    let cartCount = document.getElementById("cart-count");
+
+    if (cartCount) {
+      cartCount.textContent = cart.length;
+    }
+  }
+
+  updateCartCount();
+</script>
+
 
     <footer class="footer">
       <p>Kontakt oss: kontakt@smykker.no</p>
