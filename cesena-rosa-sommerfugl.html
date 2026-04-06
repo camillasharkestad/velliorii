@@ -1,0 +1,126 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cesena rosa sommerfugl</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="top-line">
+      <a href="index.html">VELIORII</a>
+    </div>
+
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="index.html">Forside</a>
+        <a href="alle-smykker.html">Se alle våre smykker</a>
+        <a href="#">Salg</a>
+        <a href="kontakt.html">Kontakt oss</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="handlekurv.html" class="cart-link">
+          🛒 <span id="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="product-page">
+      <div class="product-page-container">
+
+        <div class="product-gallery">
+          <div class="thumbnail-column">
+            <img src="Images/sommerfugl-lys-rosa.jpg" class="thumbnail active" onclick="changeImage(this)" />
+            <img src="Images/sommerfugl-rosa-rosa-stor.jpg" class="thumbnail" onclick="changeImage(this)" />
+            <img src="Images/sommerfugl-rosa-stor.jpg" class="thumbnail" onclick="changeImage(this)" />
+          </div>
+
+          <div class="main-image-container">
+            <img id="main-product-image" src="Images/sommerfugl-lys-rosa.jpg" class="main-product-image" />
+          </div>
+        </div>
+
+        <div class="product-page-info">
+          <p class="product-category">Ring</p>
+          <h1>Cesena rosa sommerfugl</h1>
+          <p class="product-price">299 kr</p>
+
+          <p class="product-description">
+            Cesena rosa sommerfugl er en elegant og feminin ring med et vakkert
+            sommerfugldesign dekorert med glitrende steiner i rosa og gulltoner.
+            Ringen gir antrekket et unikt og romantisk uttrykk, og passer både
+            til hverdags og spesielle anledninger.
+          </p>
+
+          <p class="product-description">
+            Smykket kan bæres alene som et statement-smykke, eller kombineres
+            med andre ringer for en mer personlig stil.
+          </p>
+
+          <div class="product-details">
+            <p><strong>Materiale:</strong> Gullfarget metall</p>
+            <p><strong>Farge:</strong> Rosa, gull og stein</p>
+            <p><strong>Størrelse:</strong> Justerbar</p>
+          </div>
+
+          <button
+            class="buy-button"
+            onclick="addToCart('Cesena rosa sommerfugl', 299, 'Images/sommerfugl-lys-rosa.jpg')"
+          >
+            Legg i handlekurv
+          </button>
+        </div>
+
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Kontakt oss: kontakt@smykker.no</p>
+      <p>Tlf: 123 45 678</p>
+      <p>© 2026 Smykkebutikk</p>
+    </footer>
+
+    <script>
+      function addToCart(name, price, image) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        cart.push({
+          name: name,
+          price: price,
+          image: image
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        alert(name + " ble lagt i handlekurven");
+      }
+
+      function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+        }
+      }
+
+      function changeImage(thumbnail) {
+        const mainImage = document.getElementById("main-product-image");
+        mainImage.src = thumbnail.src;
+
+        document.querySelectorAll(".thumbnail").forEach(img => {
+          img.classList.remove("active");
+        });
+
+        thumbnail.classList.add("active");
+      }
+
+      updateCartCount();
+    </script>
+  </body>
+</html>

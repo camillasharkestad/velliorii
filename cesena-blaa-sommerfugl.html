@@ -1,0 +1,107 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Cesena blå sommerfugl</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="top-line">
+      <a href="index.html">VELIORII</a>
+    </div>
+
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="index.html">Forside</a>
+        <a href="alle-smykker.html">Se alle våre smykker</a>
+        <a href="#">Salg</a>
+        <a href="kontakt.html">Kontakt oss</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="handlekurv.html" class="cart-link">
+          🛒 <span id="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="product-page">
+      <div class="product-page-container">
+        <div class="product-page-image">
+          <img
+            src="Images/blaa-sommerfugl-ring.jpg"
+            alt="Cesena blå sommerfugl"
+          />
+        </div>
+
+        <div class="product-page-info">
+          <p class="product-category">Ring</p>
+          <h1>Cesena blå sommerfugl</h1>
+          <p class="product-price">499 kr</p>
+
+          <p class="product-description">
+            Cesena blå sommerfugl er en elegant ring med et detaljert
+            sommerfugldesign i vakre blå toner. Smykket gir et unikt og
+            iøynefallende uttrykk som passer perfekt både til hverdag og fest.
+          </p>
+
+          <p class="product-description">
+            Ringen kan brukes alene som et statement-smykke, eller kombineres
+            med andre ringer for en mer personlig stil.
+          </p>
+
+          <div class="product-details">
+            <p><strong>Materiale:</strong> Gullbelagt metall</p>
+            <p><strong>Farge:</strong> Blå og gull</p>
+            <p><strong>Størrelse:</strong> Justerbar</p>
+          </div>
+
+          <button
+            class="buy-button"
+            onclick="addToCart('Cesena blå sommerfugl', 499, 'Images/blaa-sommerfugl-ring.jpg')"
+          >
+            Legg i handlekurv
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Kontakt oss: kontakt@smykker.no</p>
+      <p>Tlf: 123 45 678</p>
+      <p>© 2026 Smykkebutikk</p>
+    </footer>
+
+    <script>
+      function addToCart(name, price, image) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        cart.push({
+          name: name,
+          price: price,
+          image: image
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        alert(name + " ble lagt i handlekurven");
+      }
+
+      function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+        }
+      }
+
+      updateCartCount();
+    </script>
+  </body>
+</html>

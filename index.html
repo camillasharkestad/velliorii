@@ -17,14 +17,23 @@
     />
   </head>
   <body>
-    <div class="top-line">VELIORII</div>
+    <div class="top-line">
+  <a href="index.html">VELIORII</a>
+</div>
+<nav class="navbar">
+  <div class="nav-left">
+    <a href="#">Nyeste kolleksjon</a>
+    <a href="alle-smykker.html">Se alle våre smykker</a>
+    <a href="#">Salg</a>
+    <a href="kontakt.html">Kontakt oss</a>
+  </div>
 
-    <nav class="navbar">
-      <a href="#">Nyeste kolleksjon</a>
-      <a href="#">Se alle våre smykker</a>
-      <a href="#">Salg</a>
-      <a href="kontakt.html">Kontakt oss</a>
-    </nav>
+  <div class="nav-right">
+    <a href="handlekurv.html" class="cart-link">
+      🛒 <span id="cart-count">0</span>
+    </a>
+  </div>
+</nav>
 
     <section class="hero"></section>
 
@@ -108,14 +117,14 @@
           <p>Se mer</p>
         </a>
 
-        <a href="#" class="product-card simple">
-          <img
-            src="Images/oreringer-gull-beige-hvit-plain.jpg"
-            alt="Stella ring"
-          />
-          <h3>Stella ring</h3>
-          <p>Se mer</p>
-        </a>
+        <a href="stella-ring.html" class="product-card simple">
+  <img
+    src="Images/lys-gull-perlering.jpg"
+    alt="Stella ring"
+  />
+  <h3>Stella ring</h3>
+  <p>Se mer</p>
+</a>
 
         <a href="#" class="product-card simple">
           <img src="Images/Runde25.jpg" alt="Anello Eleganza" />
@@ -125,38 +134,45 @@
       </div>
     </section>
 
-  <div class="large-images">
+ <div class="large-images">
   <div class="large-image-card">
     <img src="Images/ringer-striper-dark.jpg" alt="Bilde 1" />
-    <a href="alle-smykker.html" class="large-image-button">Se alle våre smykker her</a>
   </div>
 
-  <div class="large-image-card">
+  <div class="large-image-card right-image-card">
     <img src="Images/dark-gull-ring-perle.jpg" alt="Bilde 2" />
+    <a href="alle-smykker.html" class="large-image-button">
+      Se alle våre smykker her
+    </a>
   </div>
 </div>
 
-<section class="inspirasjon">
-  <p class="inspirasjon-tekst">
-    Vi elsker å se din stil! Del dine bilder med / @velliorii og få mulighet til å vise dine smykker her.
-  </p>
 
-  <div class="inspirasjon-wrapper">
-    <button class="carousel-btn left">&#10094;</button>
 
-    <div class="inspirasjon-gallery">
-      <img src="Images/lys-gull-perlering.jpg" alt="" />
-      <img src="Images/tykk-ring-gull-perle.jpg" alt="" />
-      <img src="Images/oreringer-gull-beige-hvit-plain.jpg" alt="" />
-      <img src="Images/smykke-lys-sten.jpg" alt="" />
-      <img src="Images/armband-perle-vase.jpg" alt="" />
-      <img src="Images/dark-flereringer.jpg" alt="" />
-      <img src="Images/halskjede-ring-perle.jpg" alt="" />
-    </div>
+    
 
-    <button class="carousel-btn right">&#10095;</button>
-  </div>
-</section>
+    <section class="inspirasjon">
+      <p class="inspirasjon-tekst">
+        Vi elsker å se din stil! Del dine bilder med / @velliorii og få mulighet
+        til å vise dine smykker her.
+      </p>
+
+      <div class="inspirasjon-wrapper">
+        <button class="carousel-btn left">&#10094;</button>
+
+        <div class="inspirasjon-gallery">
+          <img src="Images/lys-gull-perlering.jpg" alt="" />
+          <img src="Images/tykk-ring-gull-perle.jpg" alt="" />
+          <img src="Images/oreringer-gull-beige-hvit-plain.jpg" alt="" />
+          <img src="Images/smykke-lys-sten.jpg" alt="" />
+          <img src="Images/armband-perle-vase.jpg" alt="" />
+          <img src="Images/dark-flereringer.jpg" alt="" />
+          <img src="Images/halskjede-ring-perle.jpg" alt="" />
+        </div>
+
+        <button class="carousel-btn right">&#10095;</button>
+      </div>
+    </section>
 
     <footer class="footer">
       <p>Kontakt oss: kontakt@smykker.no</p>
@@ -165,23 +181,24 @@
     </footer>
 
     <script>
-  const gallery = document.querySelector(".inspirasjon-gallery");
-  const leftBtn = document.querySelector(".carousel-btn.left");
-  const rightBtn = document.querySelector(".carousel-btn.right");
+      const gallery = document.querySelector(".inspirasjon-gallery");
+      const leftBtn = document.querySelector(".carousel-btn.left");
+      const rightBtn = document.querySelector(".carousel-btn.right");
 
-  rightBtn.addEventListener("click", () => {
-    gallery.scrollBy({
-      left: 320,
-      behavior: "smooth"
-    });
-  });
+      rightBtn.addEventListener("click", () => {
+        gallery.scrollBy({
+          left: 320,
+          behavior: "smooth",
+        });
+      });
 
-  leftBtn.addEventListener("click", () => {
-    gallery.scrollBy({
-      left: -320,
-      behavior: "smooth"
-    });
-  });
-</script>
+      leftBtn.addEventListener("click", () => {
+        gallery.scrollBy({
+          left: -320,
+          behavior: "smooth",
+        });
+      });
+    </script>
+    
   </body>
 </html>

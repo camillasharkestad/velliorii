@@ -1,0 +1,80 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Handlekurv</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="top-line">
+      <a href="index.html">VELIORII</a>
+    </div>
+
+    <nav class="navbar">
+      <a href="index.html">Forside</a>
+      <a href="alle-smykker.html">Se alle våre smykker</a>
+      <a href="handlekurv.html">Handlekurv</a>
+      <a href="kontakt.html">Kontakt oss</a>
+    </nav>
+
+    <section class="cart-page">
+      <h2>Handlekurv</h2>
+      <div id="cart-items"></div>
+      <h3 id="cart-total">Totalt: 0 kr</h3>
+      <button class="buy-button" onclick="clearCart()">Tøm handlekurv</button>
+    </section>
+
+    <footer class="footer">
+      <p>Kontakt oss: kontakt@smykker.no</p>
+      <p>Tlf: 123 45 678</p>
+      <p>© 2026 Smykkebutikk</p>
+    </footer>
+
+    <script>
+      function loadCart() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartItems = document.getElementById("cart-items");
+        let cartTotal = document.getElementById("cart-total");
+
+        cartItems.innerHTML = "";
+        let total = 0;
+
+        cart.forEach((item, index) => {
+          total += item.price;
+
+          cartItems.innerHTML += `
+            <div class="cart-item">
+              <img src="${item.image}" alt="${item.name}">
+              <div class="cart-item-info">
+                <h3>${item.name}</h3>
+                <p>${item.price} kr</p>
+                <button onclick="removeFromCart(${index})">Fjern</button>
+              </div>
+            </div>
+          `;
+        });
+
+        cartTotal.textContent = "Totalt: " + total + " kr";
+      }
+
+      function removeFromCart(index) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        cart.splice(index, 1);
+        localStorage.setItem("cart", JSON.stringify(cart));
+        loadCart();
+      }
+
+      function clearCart() {
+        localStorage.removeItem("cart");
+        loadCart();
+      }
+
+      loadCart();
+    </script>
+  </body>
+</html>

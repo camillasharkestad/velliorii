@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sorento armbånd</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="top-line">
+      <a href="index.html">VELIORII</a>
+    </div>
+
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="index.html">Forside</a>
+        <a href="alle-smykker.html">Se alle våre smykker</a>
+        <a href="#">Salg</a>
+        <a href="kontakt.html">Kontakt oss</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="handlekurv.html" class="cart-link">
+          🛒 <span id="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="product-page">
+      <div class="product-page-container">
+        <div class="product-page-image">
+          <img src="Images/gyllen-perlearmband.jpg" alt="Sorento armbånd" />
+        </div>
+
+        <div class="product-page-info">
+          <p class="product-category">Armbånd</p>
+          <h1>Sorento armbånd</h1>
+          <p class="product-price">399 kr</p>
+
+          <p class="product-description">
+            Sorento armbånd er et elegant og tidløst smykke med delikate
+            perledetaljer. Det gir et sofistikert uttrykk og passer perfekt
+            både til hverdags og spesielle anledninger.
+          </p>
+
+          <p class="product-description">
+            Armbåndet kan brukes alene for et stilrent uttrykk, eller kombineres
+            med andre smykker for en mer personlig look.
+          </p>
+
+          <div class="product-details">
+            <p><strong>Materiale:</strong> Gullbelagt rustfritt stål</p>
+            <p><strong>Farge:</strong> Gull og perlehvit</p>
+            <p><strong>Størrelse:</strong> Justerbar</p>
+          </div>
+
+          <button
+            class="buy-button"
+            onclick="addToCart('Sorento armbånd', 399, 'Images/gyllen-perlearmband.jpg')"
+          >
+            Legg i handlekurv
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Kontakt oss: kontakt@smykker.no</p>
+      <p>Tlf: 123 45 678</p>
+      <p>© 2026 Smykkebutikk</p>
+    </footer>
+
+    <script>
+      function addToCart(name, price, image) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        cart.push({
+          name: name,
+          price: price,
+          image: image
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        alert(name + " ble lagt i handlekurven");
+      }
+
+      function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+        }
+      }
+
+      updateCartCount();
+    </script>
+  </body>
+</html>

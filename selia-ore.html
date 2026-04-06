@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Selia øreringer</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="top-line">
+      <a href="index.html">VELIORII</a>
+    </div>
+
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="index.html">Forside</a>
+        <a href="alle-smykker.html">Se alle våre smykker</a>
+        <a href="#">Salg</a>
+        <a href="kontakt.html">Kontakt oss</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="handlekurv.html" class="cart-link">
+          🛒 <span id="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="product-page">
+      <div class="product-page-container">
+        <div class="product-page-image">
+          <img src="Images/gull-oreringer-plain.jpg" alt="Selia øreringer" />
+        </div>
+
+        <div class="product-page-info">
+          <p class="product-category">Øredobber</p>
+          <h1>Selia øreringer</h1>
+          <p class="product-price">399 kr</p>
+
+          <p class="product-description">
+            Selia øreringer er elegante og tidløse øredobber med et klassisk design.
+            De gir et stilrent og sofistikert uttrykk som passer perfekt til både
+            hverdag og fest.
+          </p>
+
+          <p class="product-description">
+            Øredobbene kan brukes alene for et minimalistisk uttrykk, eller
+            kombineres med andre smykker for en mer personlig stil.
+          </p>
+
+          <div class="product-details">
+            <p><strong>Materiale:</strong> Gullbelagt rustfritt stål</p>
+            <p><strong>Farge:</strong> Gull</p>
+            <p><strong>Type:</strong> Øredobber</p>
+          </div>
+
+          <button
+            class="buy-button"
+            onclick="addToCart('Selia øreringer', 399, 'Images/gull-oreringer-plain.jpg')"
+          >
+            Legg i handlekurv
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Kontakt oss: kontakt@smykker.no</p>
+      <p>Tlf: 123 45 678</p>
+      <p>© 2026 Smykkebutikk</p>
+    </footer>
+
+    <script>
+      function addToCart(name, price, image) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        cart.push({
+          name: name,
+          price: price,
+          image: image
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        alert(name + " ble lagt i handlekurven");
+      }
+
+      function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+        }
+      }
+
+      updateCartCount();
+    </script>
+  </body>
+</html>
