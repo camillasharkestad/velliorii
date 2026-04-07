@@ -669,3 +669,16 @@ body {
     height: auto;
   }
 }
+.video-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 40px 0;
+}
+
+.video-section video {
+  width: 80%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+}

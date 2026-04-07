@@ -1,0 +1,152 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Pompeii halskjede</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <div class="top-line">
+      <a href="index.html">VELIORII</a>
+    </div>
+
+    <nav class="navbar">
+      <div class="nav-left">
+        <a href="index.html">Forside</a>
+        <a href="alle-smykker.html">Se alle våre smykker</a>
+        <a href="#">Salg</a>
+        <a href="kontakt.html">Kontakt oss</a>
+      </div>
+
+      <div class="nav-right">
+        <a href="handlekurv.html" class="cart-link">
+          🛒 <span id="cart-count">0</span>
+        </a>
+      </div>
+    </nav>
+
+    <section class="product-page">
+      <div class="product-page-container">
+        <div class="product-gallery">
+          <div class="thumbnail-column">
+            <img
+              src="Images/pompeii-hals-1.jpg"
+              class="thumbnail active"
+              onclick="changeImage(this)"
+              alt="Pompeii halskjede bilde 1"
+            />
+            <img
+              src="Images/pompeii-hals-2.jpg"
+              class="thumbnail"
+              onclick="changeImage(this)"
+              alt="Pompeii halskjede bilde 2"
+            />
+            <img
+              src="Images/pompeii-hals-3.jpg"
+              class="thumbnail"
+              onclick="changeImage(this)"
+              alt="Pompeii halskjede bilde 3"
+            />
+            <img
+              src="Images/pompeii-hals-4.jpg"
+              class="thumbnail"
+              onclick="changeImage(this)"
+              alt="Pompeii halskjede bilde 4"
+            />
+          </div>
+
+          <div class="main-image-container">
+            <img
+              id="main-product-image"
+              src="Images/pompeii-hals-1.jpg"
+              class="main-product-image"
+              alt="Pompeii halskjede"
+            />
+          </div>
+        </div>
+
+        <div class="product-page-info">
+          <p class="product-category">Halskjede</p>
+          <h1>Pompeii halskjede</h1>
+          <p class="product-price">449 kr</p>
+
+          <p class="product-description">
+            Pompeii halskjede er et elegant og tidløst smykke med et sofistikert
+            uttrykk. Det løfter antrekket på en subtil måte og passer både til
+            hverdag og spesielle anledninger.
+          </p>
+
+          <p class="product-description">
+            Halskjedet kan brukes alene for en klassisk og minimalistisk stil,
+            eller kombineres med andre smykker for et mer personlig uttrykk.
+          </p>
+
+          <div class="product-details">
+            <p><strong>Materiale:</strong> Gullbelagt rustfritt stål</p>
+            <p><strong>Farge:</strong> Gull</p>
+            <p><strong>Type:</strong> Halskjede</p>
+          </div>
+
+          <button
+            class="buy-button"
+            onclick="
+              addToCart('Pompeii halskjede', 449, 'Images/pompeii-hals-1.jpg')
+            "
+          >
+            Legg i handlekurv
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Kontakt oss: kontakt@smykker.no</p>
+      <p>Tlf: 123 45 678</p>
+      <p>© 2026 Smykkebutikk</p>
+    </footer>
+
+    <script>
+      function addToCart(name, price, image) {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        cart.push({
+          name: name,
+          price: price,
+          image: image,
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        alert(name + " ble lagt i handlekurven");
+      }
+
+      function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+        }
+      }
+
+      function changeImage(thumbnail) {
+        const mainImage = document.getElementById("main-product-image");
+        const newSrc = thumbnail.getAttribute("src");
+        mainImage.setAttribute("src", newSrc);
+
+        document.querySelectorAll(".thumbnail").forEach(function (img) {
+          img.classList.remove("active");
+        });
+
+        thumbnail.classList.add("active");
+      }
+
+      updateCartCount();
+    </script>
+  </body>
+</html>
