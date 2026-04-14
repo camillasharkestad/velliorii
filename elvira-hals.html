@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="no">
   <head>
     <meta charset="UTF-8" />
@@ -27,6 +27,8 @@
         <a href="handlekurv.html" class="cart-link">
           🛒 <span id="cart-count">0</span>
         </a>
+
+        <button id="logout-button">Logg ut</button>
       </div>
     </nav>
 
@@ -76,13 +78,15 @@
           <p class="product-price">449 kr</p>
 
           <p class="product-description">
-            Elvira halskjede er et elegant og feminint smykke med et tidløst design.
-            Det gir et sofistikert uttrykk og passer perfekt til både hverdag og fest.
+            Elvira halskjede er et elegant og tidløst smykke med et feminint
+            uttrykk. Designet kombinerer et enkelt formspråk med delikate
+            detaljer, og gjør halskjedet perfekt både til hverdags og spesielle
+            anledninger.
           </p>
 
           <p class="product-description">
-            Halskjedet kan brukes alene for et minimalistisk uttrykk,
-            eller kombineres med andre smykker for en mer personlig stil.
+            Smykket passer fint alene, men kan også kombineres med andre
+            halskjeder og smykker for et mer personlig uttrykk.
           </p>
 
           <div class="product-details">
@@ -91,7 +95,10 @@
             <p><strong>Type:</strong> Halskjede</p>
           </div>
 
+          <p id="stock-status"></p>
+
           <button
+            id="buy-button"
             class="buy-button"
             onclick="addToCart('Elvira halskjede', 449, 'Images/Elvira-halskjede7.jpg')"
           >
@@ -107,24 +114,16 @@
       <p>© 2026 Smykkebutikk</p>
     </footer>
 
-    <script>
-      function addToCart(name, price, image) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-        cart.push({
-          name: name,
-          price: price,
-          image: image
-        });
-
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateCartCount();
-        alert(name + " ble lagt i handlekurven");
-      }
+      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+      const supabase = createClient(supabaseUrl, supabaseKey);
 
       function updateCartCount() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        let cartCount = document.getElementById("cart-count");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartCount = document.getElementById("cart-count");
 
         if (cartCount) {
           cartCount.textContent = cart.length;
@@ -133,17 +132,125 @@
 
       function changeImage(thumbnail) {
         const mainImage = document.getElementById("main-product-image");
-        const newSrc = thumbnail.getAttribute("src");
-        mainImage.setAttribute("src", newSrc);
 
-        document.querySelectorAll(".thumbnail").forEach(function (img) {
+        if (!mainImage || !thumbnail) return;
+
+        mainImage.src = thumbnail.src;
+
+        document.querySelectorAll(".thumbnail").forEach((img) => {
           img.classList.remove("active");
         });
 
         thumbnail.classList.add("active");
       }
 
+      async function loadProduct() {
+        const stockText = document.getElementById("stock-status");
+        const buyButton = document.getElementById("buy-button");
+        const logoutButton = document.getElementById("logout-button");
+
+        stockText.textContent = "Laster lagerstatus...";
+
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (logoutButton) {
+          if (!user) {
+            logoutButton.style.display = "none";
+          } else {
+            logoutButton.style.display = "inline-block";
+          }
+
+          logoutButton.addEventListener("click", async () => {
+            await supabase.auth.signOut();
+            window.location.reload();
+          });
+        }
+
+        const { data, error } = await supabase
+          .from("Products")
+          .select("name, stock")
+          .eq("name", "Elvira halskjede")
+          .single();
+
+        if (error) {
+          stockText.textContent = "Feil: " + error.message;
+          return;
+        }
+
+        if (!data) {
+          stockText.textContent = "Produkt ikke funnet";
+          return;
+        }
+
+        if (data.stock <= 0) {
+          stockText.textContent = "Utsolgt";
+          buyButton.textContent = "Utsolgt";
+          buyButton.disabled = true;
+        } else {
+          if (user) {
+            stockText.textContent = "På lager: " + data.stock;
+          } else {
+            stockText.textContent = "På lager";
+          }
+
+          buyButton.textContent = "Legg i handlekurv";
+          buyButton.disabled = false;
+        }
+      }
+
+      async function addToCart(name, price, image) {
+        const { data, error } = await supabase
+          .from("Products")
+          .select("stock")
+          .eq("name", name)
+          .single();
+
+        if (error) {
+          alert("Kunne ikke hente lagerstatus.");
+          return;
+        }
+
+        if (!data) {
+          alert("Produkt ikke funnet.");
+          return;
+        }
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const quantityInCart = cart.filter((item) => item.name === name).length;
+
+        if (data.stock <= 0) {
+          alert("Produktet er utsolgt.");
+          loadProduct();
+          return;
+        }
+
+        if (quantityInCart >= data.stock) {
+          alert(
+            "Du kan ikke legge flere i handlekurven. Kun " +
+              data.stock +
+              " på lager."
+          );
+          return;
+        }
+
+        cart.push({
+          name: name,
+          price: price,
+          image: image,
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        alert(name + " ble lagt i handlekurven");
+      }
+
+      window.addToCart = addToCart;
+      window.changeImage = changeImage;
+
       updateCartCount();
+      loadProduct();
     </script>
   </body>
 </html>

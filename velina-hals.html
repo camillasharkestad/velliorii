@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="no">
   <head>
     <meta charset="UTF-8" />
@@ -27,6 +27,8 @@
         <a href="handlekurv.html" class="cart-link">
           🛒 <span id="cart-count">0</span>
         </a>
+
+        <button id="logout-button">Logg ut</button>
       </div>
     </nav>
 
@@ -35,19 +37,19 @@
         <div class="product-gallery">
           <div class="thumbnail-column">
             <img
-              src="Images/velina-hals-1.jpg"
+              src="Images/velina-hal2.jpg"
               class="thumbnail active"
               onclick="changeImage(this)"
               alt="Velina halskjede bilde 1"
             />
             <img
-              src="Images/velina-hals-2.jpg"
+              src="Images/Velina-halskjede2.jpg"
               class="thumbnail"
               onclick="changeImage(this)"
               alt="Velina halskjede bilde 2"
             />
             <img
-              src="Images/velina-hals-3.jpg"
+              src="Images/velina-hals.jpg"
               class="thumbnail"
               onclick="changeImage(this)"
               alt="Velina halskjede bilde 3"
@@ -73,15 +75,21 @@
         <div class="product-page-info">
           <p class="product-category">Halskjede</p>
           <h1>Velina halskjede</h1>
-          <p class="product-price">449 kr</p>
+          <p class="product-price">399 kr</p>
 
           <p class="product-description">
-            Velina halskjede er en perfekt miks av enkelt og litt ekstra. De små stenene gir akkurat nok shine, mens gullfargen gjør at det ser fresht og stilrent ut. Det er et smykke som passer til alt – enten du bare skal på skolen, henge med venner eller pynte deg litt ekstra.
-Det er fint alene, men også skikkelig kult å kombinere med andre smykker for en mer personlig stil. En sånn type kjede du bare tar på deg igjen og igjen fordi det funker til alt.
+            Velina halskjede er en perfekt miks av enkelt og litt ekstra. De små
+            stenene gir akkurat nok shine, mens gullfargen gjør at det ser
+            fresht og stilrent ut. Det er et smykke som passer til alt – enten
+            du bare skal på skolen, henge med venner eller pynte deg litt
+            ekstra. Det er fint alene, men også skikkelig kult å kombinere med
+            andre smykker for en mer personlig stil. En sånn type kjede du bare
+            tar på deg igjen og igjen fordi det funker til alt.
           </p>
 
           <p class="product-description">
-            Halskjedet er designet for å gi antrekket et sofistikert preg, enten du bruker det til hverdag eller ved spesielle anledninger.
+            Halskjedet er designet for å gi antrekket et sofistikert preg, enten
+            du bruker det til hverdag eller ved spesielle anledninger.
           </p>
 
           <div class="product-details">
@@ -89,9 +97,12 @@ Det er fint alene, men også skikkelig kult å kombinere med andre smykker for e
             <p><strong>Farge:</strong> Gull</p>
           </div>
 
+          <p id="stock-status"></p>
+
           <button
+            id="buy-button"
             class="buy-button"
-            onclick="addToCart('Velina halskjede', 449, 'Images/velina-hals-1.jpg')"
+            onclick="addToCart('Velina halskjede', 399, 'Images/Velina-halskjede2.jpg')"
           >
             Legg i handlekurv
           </button>
@@ -105,24 +116,16 @@ Det er fint alene, men også skikkelig kult å kombinere med andre smykker for e
       <p>© 2026 Smykkebutikk</p>
     </footer>
 
-    <script>
-      function addToCart(name, price, image) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-        cart.push({
-          name: name,
-          price: price,
-          image: image
-        });
-
-        localStorage.setItem("cart", JSON.stringify(cart));
-        updateCartCount();
-        alert(name + " ble lagt i handlekurven");
-      }
+      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+      const supabase = createClient(supabaseUrl, supabaseKey);
 
       function updateCartCount() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        let cartCount = document.getElementById("cart-count");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartCount = document.getElementById("cart-count");
 
         if (cartCount) {
           cartCount.textContent = cart.length;
@@ -131,17 +134,125 @@ Det er fint alene, men også skikkelig kult å kombinere med andre smykker for e
 
       function changeImage(thumbnail) {
         const mainImage = document.getElementById("main-product-image");
-        const newSrc = thumbnail.getAttribute("src");
-        mainImage.setAttribute("src", newSrc);
 
-        document.querySelectorAll(".thumbnail").forEach(function (img) {
+        if (!mainImage || !thumbnail) return;
+
+        mainImage.src = thumbnail.src;
+
+        document.querySelectorAll(".thumbnail").forEach((img) => {
           img.classList.remove("active");
         });
 
         thumbnail.classList.add("active");
       }
 
+      async function loadProduct() {
+        const stockText = document.getElementById("stock-status");
+        const buyButton = document.getElementById("buy-button");
+        const logoutButton = document.getElementById("logout-button");
+
+        stockText.textContent = "Laster lagerstatus...";
+
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (logoutButton) {
+          if (!user) {
+            logoutButton.style.display = "none";
+          } else {
+            logoutButton.style.display = "inline-block";
+          }
+
+          logoutButton.addEventListener("click", async () => {
+            await supabase.auth.signOut();
+            window.location.reload();
+          });
+        }
+
+        const { data, error } = await supabase
+          .from("Products")
+          .select("name, stock")
+          .eq("name", "Velina halskjede")
+          .single();
+
+        if (error) {
+          stockText.textContent = "Feil: " + error.message;
+          return;
+        }
+
+        if (!data) {
+          stockText.textContent = "Produkt ikke funnet";
+          return;
+        }
+
+        if (data.stock <= 0) {
+          stockText.textContent = "Utsolgt";
+          buyButton.textContent = "Utsolgt";
+          buyButton.disabled = true;
+        } else {
+          if (user) {
+            stockText.textContent = "På lager: " + data.stock;
+          } else {
+            stockText.textContent = "På lager";
+          }
+
+          buyButton.textContent = "Legg i handlekurv";
+          buyButton.disabled = false;
+        }
+      }
+
+      async function addToCart(name, price, image) {
+        const { data, error } = await supabase
+          .from("Products")
+          .select("stock")
+          .eq("name", name)
+          .single();
+
+        if (error) {
+          alert("Kunne ikke hente lagerstatus.");
+          return;
+        }
+
+        if (!data) {
+          alert("Produkt ikke funnet.");
+          return;
+        }
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const quantityInCart = cart.filter((item) => item.name === name).length;
+
+        if (data.stock <= 0) {
+          alert("Produktet er utsolgt.");
+          loadProduct();
+          return;
+        }
+
+        if (quantityInCart >= data.stock) {
+          alert(
+            "Du kan ikke legge flere i handlekurven. Kun " +
+              data.stock +
+              " på lager."
+          );
+          return;
+        }
+
+        cart.push({
+          name: name,
+          price: price,
+          image: image,
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        alert(name + " ble lagt i handlekurven");
+      }
+
+      window.addToCart = addToCart;
+      window.changeImage = changeImage;
+
       updateCartCount();
+      loadProduct();
     </script>
   </body>
 </html>

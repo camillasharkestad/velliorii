@@ -682,3 +682,42 @@ body {
   height: auto;
   display: block;
 }
+
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  
+  align-items: center;
+  margin-top: 00px;       /* horisontal midtstilling */
+  text-align: center;
+        /* gjør at den havner midt på siden */
+  padding: 00px 00px;
+}
+
+.empty-cart h2 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.empty-cart p {
+  max-width: 500px;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  color: #7a6f66;
+}
+
+
+.empty-cart-icon {
+  width: 200px;
+  margin-bottom: 50px;
+  opacity: 0.8;
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+.cart-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}

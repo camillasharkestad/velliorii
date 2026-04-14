@@ -1,27 +1,36 @@
 <script>
-  const gallery = document.querySelector('.inspirasjon-gallery');
-  const leftBtn = document.querySelector('.carousel-btn.left');
-  const rightBtn = document.querySelector('.carousel-btn.right');
+  const gallery = document.querySelector(".inspirasjon-gallery");
+  const leftBtn = document.querySelector(".carousel-btn.left");
+  const rightBtn = document.querySelector(".carousel-btn.right");
 
-  if (rightBtn && gallery) {
-    rightBtn.addEventListener('click', () => {
-      gallery.scrollBy({ left: 420, behavior: 'smooth' });
+  if (gallery && rightBtn) {
+    rightBtn.addEventListener("click", () => {
+      const scrollAmount = gallery.clientWidth * 0.8;
+      gallery.scrollBy({
+        left: scrollAmount,
+        behavior: "smooth",
+      });
     });
   }
 
-  if (leftBtn && gallery) {
-    leftBtn.addEventListener('click', () => {
-      gallery.scrollBy({ left: -420, behavior: 'smooth' });
+  if (gallery && leftBtn) {
+    leftBtn.addEventListener("click", () => {
+      const scrollAmount = gallery.clientWidth * 0.8;
+      gallery.scrollBy({
+        left: -scrollAmount,
+        behavior: "smooth",
+      });
     });
   }
 
   function changeImage(thumbnail) {
     const mainImage = document.getElementById("main-product-image");
-    if (!mainImage) return;
+
+    if (!mainImage || !thumbnail) return;
 
     mainImage.src = thumbnail.src;
 
-    document.querySelectorAll(".thumbnail").forEach(img => {
+    document.querySelectorAll(".thumbnail").forEach((img) => {
       img.classList.remove("active");
     });
 

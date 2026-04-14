@@ -1,0 +1,69 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Admin login</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
+  <body>
+    <div class="top-line">
+      <a href="index.html">VELIORII</a>
+    </div>
+
+    <section class="product-page">
+      <div class="product-page-container" style="max-width: 500px; margin: 0 auto;">
+        <div class="product-page-info" style="width: 100%;">
+          <h1>Logg inn</h1>
+
+          <input
+            type="email"
+            id="email"
+            placeholder="E-post"
+            style="width: 100%; padding: 12px; margin-bottom: 12px;"
+          />
+
+          <input
+            type="password"
+            id="password"
+            placeholder="Passord"
+            style="width: 100%; padding: 12px; margin-bottom: 12px;"
+          />
+
+          <button id="login-button" class="buy-button">Logg inn</button>
+
+          <p id="message" style="margin-top: 16px;"></p>
+        </div>
+      </div>
+    </section>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      const loginButton = document.getElementById("login-button");
+      const message = document.getElementById("message");
+
+      loginButton.addEventListener("click", async () => {
+        const email = document.getElementById("email").value;
+        const password = document.getElementById("password").value;
+
+        const { error } = await supabase.auth.signInWithPassword({
+          email,
+          password,
+        });
+
+        if (error) {
+          message.textContent = "Feil: " + error.message;
+          return;
+        }
+
+        message.textContent = "Innlogging vellykket!";
+        window.location.href = "stella-ring.html";
+      });
+    </script>
+  </body>
+</html>

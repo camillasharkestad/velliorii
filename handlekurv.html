@@ -16,17 +16,22 @@
     </div>
 
     <nav class="navbar">
-      <a href="index.html">Forside</a>
-      <a href="alle-smykker.html">Se alle våre smykker</a>
-      <a href="handlekurv.html">Handlekurv</a>
-      <a href="kontakt.html">Kontakt oss</a>
+      <div class="nav-left">
+        <a href="index.html">Forside</a>
+        <a href="alle-smykker.html">Se alle våre smykker</a>
+        <a href="handlekurv.html">Handlekurv</a>
+        <a href="kontakt.html">Kontakt oss</a>
+      </div>
     </nav>
 
     <section class="cart-page">
-      <h2>Handlekurv</h2>
       <div id="cart-items"></div>
       <h3 id="cart-total">Totalt: 0 kr</h3>
-      <button class="buy-button" onclick="clearCart()">Tøm handlekurv</button>
+
+      <div id="cart-buttons" class="cart-buttons">
+        <button class="buy-button" onclick="clearCart()">Tøm handlekurv</button>
+        <button class="buy-button" onclick="checkout()">Fullfør kjøp</button>
+      </div>
     </section>
 
     <footer class="footer">
@@ -35,13 +40,41 @@
       <p>© 2026 Smykkebutikk</p>
     </footer>
 
-    <script>
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
       function loadCart() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        let cartItems = document.getElementById("cart-items");
-        let cartTotal = document.getElementById("cart-total");
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartItems = document.getElementById("cart-items");
+        const cartTotal = document.getElementById("cart-total");
+        const cartButtons = document.getElementById("cart-buttons");
+
+        if (cart.length === 0) {
+          cartItems.innerHTML = `
+            <div class="empty-cart">
+              <img
+                src="Images/empty-chart.jpg"
+                alt="Tom handlekurv"
+                class="empty-cart-icon"
+              >
+              <h2>Din handlekurv er tom</h2>
+              <p>Når du legger noe i handlekurven din, vises det her. Klar til å begynne å handle?</p>
+              <a href="alle-smykker.html" class="start-shopping">Begynne å handle</a>
+            </div>
+          `;
+          cartTotal.style.display = "none";
+          cartButtons.style.display = "none";
+          return;
+        }
 
         cartItems.innerHTML = "";
+        cartTotal.style.display = "block";
+        cartButtons.style.display = "flex";
+
         let total = 0;
 
         cart.forEach((item, index) => {
@@ -63,7 +96,7 @@
       }
 
       function removeFromCart(index) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
         cart.splice(index, 1);
         localStorage.setItem("cart", JSON.stringify(cart));
         loadCart();
@@ -73,6 +106,86 @@
         localStorage.removeItem("cart");
         loadCart();
       }
+
+      async function checkout() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+        if (cart.length === 0) {
+          alert("Handlekurven er tom.");
+          return;
+        }
+
+        const productCounts = {};
+
+        cart.forEach((item) => {
+          productCounts[item.name] = (productCounts[item.name] || 0) + 1;
+        });
+
+        for (const productName in productCounts) {
+          const { data, error } = await supabase
+            .from("Products")
+            .select("stock")
+            .eq("name", productName)
+            .single();
+
+          if (error) {
+            alert("Feil ved henting av lager for " + productName);
+            return;
+          }
+
+          if (!data) {
+            alert("Produktet " + productName + " ble ikke funnet.");
+            return;
+          }
+
+          if (data.stock < productCounts[productName]) {
+            alert(
+              productName +
+                " har ikke nok på lager. Du har lagt " +
+                productCounts[productName] +
+                " i handlekurven, men vi har bare " +
+                data.stock +
+                " igjen."
+            );
+            return;
+          }
+        }
+
+        for (const productName in productCounts) {
+          const { data, error } = await supabase
+            .from("Products")
+            .select("stock")
+            .eq("name", productName)
+            .single();
+
+          if (error || !data) {
+            alert("Feil ved oppdatering av lager for " + productName);
+            return;
+          }
+
+          const newStock = data.stock - productCounts[productName];
+
+          const { error: updateError } = await supabase
+            .from("Products")
+            .update({ stock: newStock })
+            .eq("name", productName);
+
+          if (updateError) {
+            alert("Kunne ikke oppdatere lager for " + productName);
+            return;
+          }
+        }
+
+        localStorage.removeItem("cart");
+        loadCart();
+
+        alert("Takk for kjøpet!");
+        window.location.href = "index.html";
+      }
+
+      window.removeFromCart = removeFromCart;
+      window.clearCart = clearCart;
+      window.checkout = checkout;
 
       loadCart();
     </script>
