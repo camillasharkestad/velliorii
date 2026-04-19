@@ -37,7 +37,7 @@
         <div class="product-gallery">
           <div class="thumbnail-column">
             <img
-              src="Images/velina-hal2.jpg"
+              src="Images/Velina-hals2.jpg"
               class="thumbnail active"
               onclick="changeImage(this)"
               alt="Velina halskjede bilde 1"
@@ -102,7 +102,9 @@
           <button
             id="buy-button"
             class="buy-button"
-            onclick="addToCart('Velina halskjede', 399, 'Images/Velina-halskjede2.jpg')"
+            onclick="
+              addToCart('Velina halskjede', 399, 'Images/Velina-halskjede2.jpg')
+            "
           >
             Legg i handlekurv
           </button>
@@ -232,7 +234,7 @@
           alert(
             "Du kan ikke legge flere i handlekurven. Kun " +
               data.stock +
-              " på lager."
+              " på lager.",
           );
           return;
         }

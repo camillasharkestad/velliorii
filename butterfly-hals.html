@@ -27,6 +27,8 @@
         <a href="handlekurv.html" class="cart-link">
           🛒 <span id="cart-count">0</span>
         </a>
+
+        <button id="logout-button">Logg ut</button>
       </div>
     </nav>
 
@@ -43,8 +45,8 @@
 
           <p class="product-description">
             Butterfly halskjede er et elegant og feminint smykke inspirert av
-            sommerfugler. Det gir et lett og romantisk uttrykk som passer perfekt
-            til både hverdags og spesielle anledninger.
+            sommerfugler. Det gir et lett og romantisk uttrykk som passer
+            perfekt til både hverdags og spesielle anledninger.
           </p>
 
           <p class="product-description">
@@ -58,9 +60,14 @@
             <p><strong>Lengde:</strong> Justerbar</p>
           </div>
 
+          <p id="stock-status"></p>
+
           <button
+            id="buy-button"
             class="buy-button"
-            onclick="addToCart('Butterfly halskjede', 449, 'Images/Smykker-banner.jpg')"
+            onclick="
+              addToCart('Butterfly halskjede', 449, 'Images/Smykker-banner.jpg')
+            "
           >
             Legg i handlekurv
           </button>
@@ -74,14 +81,117 @@
       <p>© 2026 Smykkebutikk</p>
     </footer>
 
-    <script>
-      function addToCart(name, price, image) {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+        }
+      }
+
+      async function loadProduct() {
+        const stockText = document.getElementById("stock-status");
+        const buyButton = document.getElementById("buy-button");
+        const logoutButton = document.getElementById("logout-button");
+
+        stockText.textContent = "Laster lagerstatus...";
+
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        if (logoutButton) {
+          if (!user) {
+            logoutButton.style.display = "none";
+          } else {
+            logoutButton.style.display = "inline-block";
+          }
+
+          logoutButton.addEventListener("click", async () => {
+            await supabase.auth.signOut();
+            window.location.reload();
+          });
+        }
+
+        const { data, error } = await supabase
+          .from("Products")
+          .select("name, stock")
+          .eq("name", "Butterfly halskjede")
+          .single();
+
+        if (error) {
+          stockText.textContent = "Feil: " + error.message;
+          return;
+        }
+
+        if (!data) {
+          stockText.textContent = "Produkt ikke funnet";
+          return;
+        }
+
+        if (data.stock <= 0) {
+          stockText.textContent = "Utsolgt";
+          buyButton.textContent = "Utsolgt";
+          buyButton.disabled = true;
+        } else {
+          if (user) {
+            stockText.textContent = "På lager: " + data.stock;
+          } else {
+            stockText.textContent = "På lager";
+          }
+
+          buyButton.textContent = "Legg i handlekurv";
+          buyButton.disabled = false;
+        }
+      }
+
+      async function addToCart(name, price, image) {
+        const { data, error } = await supabase
+          .from("Products")
+          .select("stock")
+          .eq("name", name)
+          .single();
+
+        if (error) {
+          alert("Kunne ikke hente lagerstatus.");
+          return;
+        }
+
+        if (!data) {
+          alert("Produkt ikke funnet.");
+          return;
+        }
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const quantityInCart = cart.filter((item) => item.name === name).length;
+
+        if (data.stock <= 0) {
+          alert("Produktet er utsolgt.");
+          loadProduct();
+          return;
+        }
+
+        if (quantityInCart >= data.stock) {
+          alert(
+            "Du kan ikke legge flere i handlekurven. Kun " +
+              data.stock +
+              " på lager.",
+          );
+          return;
+        }
 
         cart.push({
           name: name,
           price: price,
-          image: image
+          image: image,
         });
 
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -89,16 +199,10 @@
         alert(name + " ble lagt i handlekurven");
       }
 
-      function updateCartCount() {
-        let cart = JSON.parse(localStorage.getItem("cart")) || [];
-        let cartCount = document.getElementById("cart-count");
-
-        if (cartCount) {
-          cartCount.textContent = cart.length;
-        }
-      }
+      window.addToCart = addToCart;
 
       updateCartCount();
+      loadProduct();
     </script>
   </body>
 </html>
