@@ -20,6 +20,7 @@
     <div class="top-line">
       <a href="index.html">VELIORII</a>
     </div>
+
     <nav class="navbar">
       <div class="nav-left">
         <a href="#">Nyeste kolleksjon</a>
@@ -40,7 +41,6 @@
     <section class="products">
       <h2>HOVEDKATEGOERIER</h2>
 
-      <!-- 4 originale produkter -->
       <div class="product-grid">
         <a href="#" class="product-card">
           <div class="image-wrapper">
@@ -97,7 +97,6 @@
 
       <h2 class="sub-title">Flere produkter</h2>
 
-      <!-- 5 nye produkter -->
       <div class="product-grid-5">
         <a href="#" class="product-card simple">
           <img src="Images/Runde22.jpg" alt="Anello Classico" />
@@ -167,6 +166,15 @@
       </div>
     </section>
 
+    <section style="text-align: center; padding: 40px">
+      <h2>Meld deg på nyhetsbrev</h2>
+      <form id="newsletter-form">
+        <input type="email" id="email" placeholder="Din e-post" required />
+        <button type="submit">Meld meg på</button>
+      </form>
+      <p id="newsletter-message"></p>
+    </section>
+
     <footer class="footer">
       <p>Kontakt oss: kontakt@smykker.no</p>
       <p>Tlf: 123 45 678</p>
@@ -192,6 +200,50 @@
         });
       });
     </script>
-    <!-- UTF-8 Encoding Normalized -->
+
+    <script type="module">
+      import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+
+      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      const form = document.getElementById("newsletter-form");
+      const message = document.getElementById("newsletter-message");
+
+      form.addEventListener("submit", async (e) => {
+        e.preventDefault();
+
+        const email = document.getElementById("email").value;
+
+        message.textContent = "";
+        message.style.color = "black";
+
+        try {
+          const { error } = await supabase
+            .from("newsletter_subscribers")
+            .insert([{ email }]);
+
+          if (error) {
+            console.log(error);
+
+            if (error.message.includes("duplicate key")) {
+              message.textContent = "Du er allerede påmeldt nyhetsbrevet.";
+            } else {
+              message.textContent = "Noe gikk galt. Prøv igjen.";
+            }
+
+            return;
+          }
+
+          message.textContent = "Takk! Du er nå påmeldt nyhetsbrevet.";
+          form.reset();
+        } catch (err) {
+          console.error("fetch-feil:", err);
+          message.textContent = "Fikk ikke kontakt med serveren. Prøv igjen.";
+        }
+      });
+    </script>
   </body>
 </html>

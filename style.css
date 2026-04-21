@@ -160,7 +160,9 @@ body {
   text-decoration: none;
   color: #2f2a26;
   text-align: center;
-  transition: transform 0.3s, box-shadow 0.3s;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
 }
 
 .product-card:hover {
@@ -686,11 +688,11 @@ body {
 .empty-cart {
   display: flex;
   flex-direction: column;
-  
+
   align-items: center;
-  margin-top: 00px;       /* horisontal midtstilling */
+  margin-top: 00px; /* horisontal midtstilling */
   text-align: center;
-        /* gjør at den havner midt på siden */
+  /* gjør at den havner midt på siden */
   padding: 00px 00px;
 }
 
@@ -707,7 +709,6 @@ body {
   color: #7a6f66;
 }
 
-
 .empty-cart-icon {
   width: 200px;
   margin-bottom: 50px;
@@ -720,4 +721,10 @@ body {
   display: flex;
   gap: 12px;
   margin-top: 20px;
+}
+
+#newsletter-message {
+  color: black;
+  margin-top: 12px;
+  font-size: 14px;
 }
