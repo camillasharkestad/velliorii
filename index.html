@@ -215,7 +215,7 @@
       form.addEventListener("submit", async (e) => {
         e.preventDefault();
 
-        const email = document.getElementById("email").value;
+        const email = document.getElementById("email").value.trim();
 
         message.textContent = "";
         message.style.color = "black";
@@ -233,9 +233,24 @@
             } else {
               message.textContent = "Noe gikk galt. Prøv igjen.";
             }
-
             return;
           }
+
+          const res = await fetch(
+            "https://amhxnojzpplpfqvxdvug.supabase.co/functions/v1/send-welcome-email",
+            {
+              method: "POST",
+              headers: {
+                "Content-Type": "application/json",
+                apikey: supabaseKey,
+                Authorization: `Bearer ${supabaseKey}`,
+              },
+              body: JSON.stringify({ email }),
+            },
+          );
+
+          const text = await res.text();
+          console.log("Function response:", res.status, text);
 
           message.textContent = "Takk! Du er nå påmeldt nyhetsbrevet.";
           form.reset();
