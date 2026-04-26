@@ -1061,3 +1061,9 @@ body {
     min-width: auto;
   }
 }
+
+@media (max-width: 768px) {
+  .nav-left {
+    display: none;
+  }
+}
