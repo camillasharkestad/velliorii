@@ -1067,3 +1067,39 @@ body {
     display: none;
   }
 }
+
+@media (max-width: 768px) {
+
+  .top-line {
+    padding: 12px 0;
+    text-align: center;
+    border-bottom: none;
+  }
+
+  .navbar {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: transparent; /* 👈 fjerner beige linje */
+    padding: 12px 18px;
+  }
+
+  .menu-toggle {
+    position: absolute;
+    left: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .nav-right {
+    position: absolute;
+    right: 18px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .nav-left {
+    display: none; /* skjuler linkene */
+  }
+}
