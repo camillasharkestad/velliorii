@@ -949,10 +949,6 @@ body {
   margin-bottom: 80px;
 }
 
-@media (max-width: 768px) {
-  .top-line {
-    position: static;
-  }
 
   .navbar {
     position: static;
@@ -1015,4 +1011,53 @@ body {
   height: 100%;
   object-fit: cover;
   object-position: 40% 60%;
+}
+.menu-toggle {
+  display: none;
+  background: none;
+  border: none;
+  font-size: 26px;
+  cursor: pointer;
+  color: #2f2a26;
+}
+
+@media (max-width: 768px) {
+  .navbar {
+    position: relative;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px 18px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
+
+  .nav-left {
+    display: none;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    width: 100%;
+    background-color: #eee6dc;
+    flex-direction: column;
+    gap: 0;
+    text-align: center;
+    padding: 20px 0;
+    z-index: 999;
+  }
+
+  .nav-left.active {
+    display: flex;
+  }
+
+  .nav-left a {
+    padding: 14px 0;
+    font-size: 15px;
+  }
+
+  .nav-right {
+    min-width: auto;
+  }
 }
