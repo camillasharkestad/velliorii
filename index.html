@@ -1,264 +1,306 @@
-<!doctype html>
-<html lang="no">
-  <head>
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300&display=swap"
-      rel="stylesheet"
-    />
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Smykkebutikk</title>
-    <link rel="stylesheet" href="style.css" />
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
-  </head>
-  <body>
-    <div class="top-line">
-      <a href="index.html">VELIORII</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Smykkebutikk</title>
+
+  <!-- GOOGLE ANALYTICS -->
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-3XYDKTPN7E"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-3XYDKTPN7E');
+  </script>
+
+  <!-- FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+  <div class="top-line">
+    <a href="index.html">VELIORII</a>
+  </div>
+
+  <nav class="navbar">
+    <div class="nav-left">
+      <a href="#">Nyeste kolleksjon</a>
+      <a href="alle-smykker.html">Se alle våre smykker</a>
+      <a href="#">Salg</a>
+      <a href="kontakt.html">Kontakt oss</a>
     </div>
 
-    <nav class="navbar">
-      <div class="nav-left">
-        <a href="#">Nyeste kolleksjon</a>
-        <a href="alle-smykker.html">Se alle våre smykker</a>
-        <a href="#">Salg</a>
-        <a href="kontakt.html">Kontakt oss</a>
-      </div>
+    <div class="nav-right">
+      <a href="handlekurv.html" class="cart-link">
+        🛒 <span id="cart-count">0</span>
+      </a>
+    </div>
+  </nav>
 
-      <div class="nav-right">
-        <a href="handlekurv.html" class="cart-link">
-          🛒 <span id="cart-count">0</span>
-        </a>
-      </div>
-    </nav>
+  <section class="hero"></section>
 
-    <section class="hero"></section>
+  <section class="products">
+    <h2>HOVEDKATEGORIER</h2>
 
-    <section class="products">
-      <h2>HOVEDKATEGOERIER</h2>
+    <div class="product-grid">
+      <a href="ringer.html" class="product-card">
+        <div class="image-wrapper">
+          <img src="Images/sunday-ring.jpg" class="main-img" alt="Ring" />
+          <img src="Images/produkt3-hover.jpg" class="hover-img" alt="Ring detalj" />
+        </div>
+        <h3>RINGER</h3>
+        <p>Se mer</p>
+      </a>
 
-      <div class="product-grid">
-        <a href="#" class="product-card">
-          <div class="image-wrapper">
-            <img src="Images/produkt1.jpg" class="main-img" alt="Ring" />
-            <img
-              src="Images/produkt1-hover.jpg"
-              class="hover-img"
-              alt="Ring detalj"
-            />
-          </div>
-          <h3>RINGER</h3>
-          <p>Se mer</p>
-        </a>
+      <a href="halskjeder.html" class="product-card">
+        <div class="image-wrapper">
+          <img src="Images/produkt2.jpg" class="main-img" alt="Halskjede" />
+          <img src="Images/elvira-halskjede.jpg" class="hover-img" alt="Halskjede detalj" />
+        </div>
+        <h3>HALSKJEDER</h3>
+        <p>Se mer</p>
+      </a>
 
-        <a href="#" class="product-card">
-          <div class="image-wrapper">
-            <img src="Images/produkt2.jpg" class="main-img" alt="Halskjede" />
-            <img
-              src="Images/produkt2-hover.jpg"
-              class="hover-img"
-              alt="Halskjede detalj"
-            />
-          </div>
-          <h3>HALSKJEDER</h3>
-          <p>Se mer</p>
-        </a>
+      <a href="armband.html" class="product-card">
+        <div class="image-wrapper">
+          <img src="Images/gyllen-perlearmband.jpg" class="main-img" alt="Armbånd" />
+          <img src="Images/Velina-halskjede.jpg" class="hover-img" alt="Armbånd detalj" />
+        </div>
+        <h3>ARMBÅND</h3>
+        <p>Se mer</p>
+      </a>
 
-        <a href="#" class="product-card">
-          <div class="image-wrapper">
-            <img src="Images/produkt3.jpg" class="main-img" alt="Armbånd" />
-            <img
-              src="Images/produkt3-hover.jpg"
-              class="hover-img"
-              alt="Armbånd detalj"
-            />
-          </div>
-          <h3>ARMBÅND</h3>
-          <p>Se mer</p>
-        </a>
+      <a href="oredobber.html" class="product-card">
+        <div class="image-wrapper">
+          <img src="Images/butterfly-hoops.jpg" class="main-img" alt="Øredobber" />
+          <img src="Images/drop-perleoredobber.jpg" class="hover-img" alt="Øredobber detalj" />
+        </div>
+        <h3>ØREDOBBER</h3>
+        <p>Se mer</p>
+      </a>
+    </div>
+  </section>
 
-        <a href="#" class="product-card">
-          <div class="image-wrapper">
-            <img src="Images/produkt4.jpg" class="main-img" alt="Øredobber" />
-            <img
-              src="Images/produkt4-hover.jpg"
-              class="hover-img"
-              alt="Øredobber detalj"
-            />
-          </div>
-          <h3>ØREDOBBER</h3>
-          <p>Se mer</p>
-        </a>
-      </div>
+  <div class="square-grid">
+    <div class="grid-item">
+      <img src="Images/hovedside1.1.jpg" alt="" />
+    </div>
+    <div class="grid-item">
+      <img src="Images/hovedside4.1.jpg" alt="" />
+    </div>
+    <div class="grid-item">
+      <img src="Images/hovedside5.1.jpg" alt="" />
+    </div>
+    <div class="grid-item">
+      <img src="Images/hovedside3.1.jpg" alt="" />
+    </div>
+  </div>
 
-      <h2 class="sub-title">Flere produkter</h2>
+  <section class="products">
+    <h2 class="sub-title">Produkter</h2>
 
-      <div class="product-grid-5">
-        <a href="#" class="product-card simple">
-          <img src="Images/Runde22.jpg" alt="Anello Classico" />
-          <h3>Anello Classico</h3>
-          <p>Se mer</p>
-        </a>
+    <div class="product-grid-5">
+      <a href="#" class="product-card simple">
+        <img src="Images/Runde22.jpg" alt="Anello Classico" />
+        <h3>Anello Classico</h3>
+        <p>Se mer</p>
+      </a>
 
-        <a href="#" class="product-card simple">
-          <img src="Images/Runde21.jpg" alt="Collana Oro" />
-          <h3>Collana Oro</h3>
-          <p>Se mer</p>
-        </a>
+      <a href="#" class="product-card simple">
+        <img src="Images/Runde21.jpg" alt="Collana Oro" />
+        <h3>Collana Oro</h3>
+        <p>Se mer</p>
+      </a>
 
-        <a href="#" class="product-card simple">
-          <img src="Images/Runde23.jpg" alt="Bracciale Luna" />
-          <h3>Bracciale Luna</h3>
-          <p>Se mer</p>
-        </a>
+      <a href="#" class="product-card simple">
+        <img src="Images/Runde23.jpg" alt="Bracciale Luna" />
+        <h3>Bracciale Luna</h3>
+        <p>Se mer</p>
+      </a>
 
-        <a href="stella-ring.html" class="product-card simple">
-          <img src="Images/lys-gull-perlering.jpg" alt="Stella ring" />
-          <h3>Stella ring</h3>
-          <p>Se mer</p>
-        </a>
+      <a href="stella-ring.html" class="product-card simple">
+        <img src="Images/lys-gull-perlering.jpg" alt="Stella ring" />
+        <h3>Stella ring</h3>
+        <p>Se mer</p>
+      </a>
 
-        <a href="#" class="product-card simple">
-          <img src="Images/Runde25.jpg" alt="Anello Eleganza" />
-          <h3>Anello Eleganza</h3>
-          <p>Se mer</p>
-        </a>
-      </div>
-    </section>
+      <a href="#" class="product-card simple">
+        <img src="Images/Runde25.jpg" alt="Anello Eleganza" />
+        <h3>Anello Eleganza</h3>
+        <p>Se mer</p>
+      </a>
+    </div>
+  </section>
 
-    <div class="large-images">
-      <div class="large-image-card">
-        <img src="Images/ringer-striper-dark.jpg" alt="Bilde 1" />
-      </div>
-
-      <div class="large-image-card right-image-card">
-        <img src="Images/dark-gull-ring-perle.jpg" alt="Bilde 2" />
-        <a href="alle-smykker.html" class="large-image-button">
-          Se alle våre smykker her
-        </a>
-      </div>
+  <div class="large-images">
+    <div class="large-image-card">
+      <img src="Images/ringer-striper-dark.jpg" alt="Bilde 1" />
     </div>
 
-    <section class="inspirasjon">
-      <p class="inspirasjon-tekst">
-        Vi elsker å se din stil! Del dine bilder med / @velliorii og få mulighet
-        til å vise dine smykker her.
-      </p>
+    <div class="large-image-card right-image-card">
+      <img src="Images/dark-gull-ring-perle.jpg" alt="Bilde 2" />
+      <a href="alle-smykker.html" class="large-image-button">
+        Se alle våre smykker her
+      </a>
+    </div>
+  </div>
 
-      <div class="inspirasjon-wrapper">
-        <button class="carousel-btn left">&#10094;</button>
+  <section class="inspirasjon">
+    <p class="inspirasjon-tekst">
+      Vi elsker å se din stil! Del dine bilder med / @velliorii og få mulighet
+      til å vise dine smykker her.
+    </p>
 
-        <div class="inspirasjon-gallery">
-          <img src="Images/lys-gull-perlering.jpg" alt="" />
-          <img src="Images/tykk-ring-gull-perle.jpg" alt="" />
-          <img src="Images/oreringer-gull-beige-hvit-plain.jpg" alt="" />
-          <img src="Images/smykke-lys-sten.jpg" alt="" />
-          <img src="Images/armband-perle-vase.jpg" alt="" />
-          <img src="Images/dark-flereringer.jpg" alt="" />
-          <img src="Images/halskjede-ring-perle.jpg" alt="" />
+    <div class="inspirasjon-wrapper">
+      <button class="carousel-btn left">&#10094;</button>
+
+      <div class="inspirasjon-gallery">
+        <img src="Images/lys-gull-perlering.jpg" alt="" />
+        <img src="Images/tykk-ring-gull-perle.jpg" alt="" />
+        <img src="Images/oreringer-gull-beige-hvit-plain.jpg" alt="" />
+        <img src="Images/smykke-lys-sten.jpg" alt="" />
+        <img src="Images/armband-perle-vase.jpg" alt="" />
+        <img src="Images/dark-flereringer.jpg" alt="" />
+        <img src="Images/halskjede-ring-perle.jpg" alt="" />
+      </div>
+
+      <button class="carousel-btn right">&#10095;</button>
+    </div>
+  </section>
+
+  <section style="text-align: center; padding: 40px">
+    <h2>Meld deg på nyhetsbrev</h2>
+    <form id="newsletter-form">
+      <input type="email" id="email" placeholder="Din e-post" required />
+      <button type="submit">Meld meg på</button>
+    </form>
+    <p id="newsletter-message"></p>
+  </section>
+
+  <footer class="footer-luxury">
+    <div class="footer-top">
+      <div class="footer-newsletter">
+        <h2>BLI EN VELLIORII INSIDER</h2>
+        <p>Meld deg på vårt nyhetsbrev og få tidlig tilgang, inspirasjon og eksklusive fordeler.</p>
+
+        <form id="footer-newsletter-form" class="footer-form">
+          <input type="email" placeholder="E-postadresse" required />
+          <button type="submit">→</button>
+        </form>
+      </div>
+
+      <div class="footer-links">
+        <div>
+          <h3>KUNDESERVICE</h3>
+          <a href="#">FAQ</a>
+          <a href="#">Bytte & retur</a>
+          <a href="#">Frakt</a>
+          <a href="kontakt.html">Kontakt oss</a>
         </div>
 
-        <button class="carousel-btn right">&#10095;</button>
+        <div>
+          <h3>RESSURSER</h3>
+          <a href="#">Min konto</a>
+          <a href="#">Fraktpolicy</a>
+          <a href="#">Returpolicy</a>
+          <a href="#">Personvern</a>
+        </div>
+
+        <div>
+          <h3>OM OSS</h3>
+          <a href="#">Om Velliorii</a>
+          <a href="#">Samarbeid</a>
+          <a href="#">Våre smykker</a>
+        </div>
       </div>
-    </section>
+    </div>
 
-    <section style="text-align: center; padding: 40px">
-      <h2>Meld deg på nyhetsbrev</h2>
-      <form id="newsletter-form">
-        <input type="email" id="email" placeholder="Din e-post" required />
-        <button type="submit">Meld meg på</button>
-      </form>
-      <p id="newsletter-message"></p>
-    </section>
+    <div class="footer-brand">
+      <h1>VELLIORII</h1>
+    </div>
 
-    <footer class="footer">
-      <p>Kontakt oss: kontakt@smykker.no</p>
-      <p>Tlf: 123 45 678</p>
-      <p>© 2026 Smykkebutikk</p>
-    </footer>
+    <div class="footer-bottom">
+      <p>© 2026 Velliorii</p>
+      <div class="footer-socials">
+        <a href="#">Instagram</a>
+        <a href="#">TikTok</a>
+      </div>
+    </div>
+  </footer>
 
-    <script>
-      const gallery = document.querySelector(".inspirasjon-gallery");
-      const leftBtn = document.querySelector(".carousel-btn.left");
-      const rightBtn = document.querySelector(".carousel-btn.right");
+  <script>
+    const gallery = document.querySelector(".inspirasjon-gallery");
+    const leftBtn = document.querySelector(".carousel-btn.left");
+    const rightBtn = document.querySelector(".carousel-btn.right");
 
-      rightBtn.addEventListener("click", () => {
-        gallery.scrollBy({
-          left: 320,
-          behavior: "smooth",
-        });
+    rightBtn.addEventListener("click", () => {
+      gallery.scrollBy({
+        left: 320,
+        behavior: "smooth",
       });
+    });
 
-      leftBtn.addEventListener("click", () => {
-        gallery.scrollBy({
-          left: -320,
-          behavior: "smooth",
-        });
+    leftBtn.addEventListener("click", () => {
+      gallery.scrollBy({
+        left: -320,
+        behavior: "smooth",
       });
-    </script>
+    });
+  </script>
 
-    <script type="module">
-      import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
+  <script type="module">
+    const form = document.getElementById("newsletter-form");
+    const message = document.getElementById("newsletter-message");
 
-      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
-      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+    form.addEventListener("submit", async (e) => {
+      e.preventDefault();
 
-      const supabase = createClient(supabaseUrl, supabaseKey);
+      const email = document.getElementById("email").value.trim();
+      message.textContent = "";
+      message.style.color = "black";
 
-      const form = document.getElementById("newsletter-form");
-      const message = document.getElementById("newsletter-message");
-
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
-
-        const email = document.getElementById("email").value.trim();
-
-        message.textContent = "";
-        message.style.color = "black";
-
-        try {
-          const { error } = await supabase
-            .from("newsletter_subscribers")
-            .insert([{ email }]);
-
-          if (error) {
-            console.log(error);
-
-            if (error.message.includes("duplicate key")) {
-              message.textContent = "Du er allerede påmeldt nyhetsbrevet.";
-            } else {
-              message.textContent = "Noe gikk galt. Prøv igjen.";
-            }
-            return;
-          }
-
-          const res = await fetch(
-            "https://amhxnojzpplpfqvxdvug.supabase.co/functions/v1/send-welcome-email",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-                apikey: supabaseKey,
-                Authorization: `Bearer ${supabaseKey}`,
-              },
-              body: JSON.stringify({ email }),
+      try {
+        const res = await fetch(
+          "https://amhxnojzpplpfqvxdvug.supabase.co/functions/v1/newsletter-signup",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
             },
-          );
+            body: JSON.stringify({ email }),
+          },
+        );
 
-          const text = await res.text();
-          console.log("Function response:", res.status, text);
+        const text = await res.text();
+        console.log("STATUS:", res.status);
+        console.log("RESPONSE:", text);
 
-          message.textContent = "Takk! Du er nå påmeldt nyhetsbrevet.";
-          form.reset();
-        } catch (err) {
-          console.error("fetch-feil:", err);
-          message.textContent = "Fikk ikke kontakt med serveren. Prøv igjen.";
+        let data = {};
+        try {
+          data = JSON.parse(text);
+        } catch {}
+
+        if (!res.ok) {
+          message.textContent = data.error || text || "Noe gikk galt.";
+          return;
         }
-      });
-    </script>
-  </body>
+
+        if (data.alreadyExists) {
+          message.textContent = "Du er allerede påmeldt nyhetsbrevet.";
+          return;
+        }
+
+        message.textContent = "Takk! Du er nå påmeldt nyhetsbrevet.";
+        form.reset();
+      } catch (err) {
+        console.error("FETCH ERROR:", err);
+        message.textContent = "Fikk ikke kontakt med serveren.";
+      }
+    });
+  </script>
+</body>
 </html>
