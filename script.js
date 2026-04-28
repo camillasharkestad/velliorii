@@ -1,4 +1,5 @@
 <script>
+  // Inspirasjon carousel
   const gallery = document.querySelector(".inspirasjon-gallery");
   const leftBtn = document.querySelector(".carousel-btn.left");
   const rightBtn = document.querySelector(".carousel-btn.right");
@@ -8,7 +9,7 @@
       const scrollAmount = gallery.clientWidth * 0.8;
       gallery.scrollBy({
         left: scrollAmount,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     });
   }
@@ -18,15 +19,15 @@
       const scrollAmount = gallery.clientWidth * 0.8;
       gallery.scrollBy({
         left: -scrollAmount,
-        behavior: "smooth",
+        behavior: "smooth"
       });
     });
   }
 
+  // Bytte produktbilde
   function changeImage(thumbnail) {
     const mainImage = document.getElementById("main-product-image");
-
-    if (!mainImage || !thumbnail) return;
+    if (!mainImage) return;
 
     mainImage.src = thumbnail.src;
 
