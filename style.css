@@ -1141,3 +1141,14 @@ body {
     visibility: hidden;
   }
 }
+.cart-link i {
+  color: #2f2a26; /* mørk grå (samme som resten av teksten din) */
+}
+.cart-link:hover i {
+  opacity: 0.7;
+}
+@media (max-width: 600px) {
+  .main-categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

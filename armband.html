@@ -5,22 +5,18 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Armbånd | Velliorii</title>
 
-    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
 
-    <!-- ICONS -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -30,30 +26,8 @@
     <section class="products">
       <h2>ARMBÅND</h2>
 
-      <div class="product-grid-5">
-        <a href="#" class="product-card simple">
-          <img src="Images/gyllen-perlearmband.jpg" alt="Perlearmbånd" />
-          <h3>Perlearmbånd</h3>
-          <p>Se mer</p>
-        </a>
-
-        <a href="#" class="product-card simple">
-          <img src="Images/armband-perle-vase.jpg" alt="Elegant armbånd" />
-          <h3>Elegant armbånd</h3>
-          <p>Se mer</p>
-        </a>
-
-        <a href="#" class="product-card simple">
-          <img src="Images/Runde23.jpg" alt="Bracciale Luna" />
-          <h3>Bracciale Luna</h3>
-          <p>Se mer</p>
-        </a>
-
-        <a href="#" class="product-card simple">
-          <img src="Images/gyllen-perlearmband.jpg" alt="Classic Gold" />
-          <h3>Classic Gold</h3>
-          <p>Se mer</p>
-        </a>
+      <div class="product-grid-5" id="product-container">
+        <p>Laster produkter...</p>
       </div>
     </section>
 
@@ -133,6 +107,50 @@
             cartCount.textContent = cart.length;
           }
         });
+    </script>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      async function loadProducts() {
+        const container = document.getElementById("product-container");
+
+        const { data, error } = await supabase
+          .from("Products")
+          .select("name, slug, price, image, category, active, id")
+          .eq("category", "armband")
+          .eq("active", true)
+          .order("id", { ascending: true });
+
+        if (error) {
+          console.error("Feil ved henting av produkter:", error);
+          container.innerHTML = "<p>Kunne ikke laste produkter.</p>";
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          container.innerHTML = "<p>Ingen produkter funnet.</p>";
+          return;
+        }
+
+        container.innerHTML = "";
+
+        data.forEach((product) => {
+          container.innerHTML += `
+            <a href="${product.slug}" class="product-card simple">
+              <img src="${product.image}" alt="${product.name}" />
+              <h3>${product.name}</h3>
+              <p>${product.price} kr</p>
+            </a>
+          `;
+        });
+      }
+
+      loadProducts();
     </script>
   </body>
 </html>

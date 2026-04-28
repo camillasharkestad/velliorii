@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Halskjeder | Velliorii</title>
 
-    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
@@ -13,13 +12,11 @@
       rel="stylesheet"
     />
 
-    <!-- ICONS -->
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
     />
 
-    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -29,24 +26,8 @@
     <section class="products">
       <h2>HALSKJEDER</h2>
 
-      <div class="product-grid-5">
-        <a href="#" class="product-card simple">
-          <img src="Images/Runde21.jpg" alt="Collana Oro" />
-          <h3>Collana Oro</h3>
-          <p>Se mer</p>
-        </a>
-
-        <a href="#" class="product-card simple">
-          <img src="Images/halskjede-ring-perle.jpg" alt="Perlehalskjede" />
-          <h3>Perlehalskjede</h3>
-          <p>Se mer</p>
-        </a>
-
-        <a href="#" class="product-card simple">
-          <img src="Images/smykke-lys-sten.jpg" alt="Luce Necklace" />
-          <h3>Luce Necklace</h3>
-          <p>Se mer</p>
-        </a>
+      <div class="product-grid-5" id="product-container">
+        <p>Laster produkter...</p>
       </div>
     </section>
 
@@ -126,6 +107,50 @@
             cartCount.textContent = cart.length;
           }
         });
+    </script>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      async function loadProducts() {
+        const container = document.getElementById("product-container");
+
+        const { data, error } = await supabase
+          .from("Products")
+          .select("name, slug, price, image, category, active, id")
+          .eq("category", "halskjeder")
+          .eq("active", true)
+          .order("id", { ascending: true });
+
+        if (error) {
+          console.error("Feil ved henting av produkter:", error);
+          container.innerHTML = "<p>Kunne ikke laste produkter.</p>";
+          return;
+        }
+
+        if (!data || data.length === 0) {
+          container.innerHTML = "<p>Ingen produkter funnet.</p>";
+          return;
+        }
+
+        container.innerHTML = "";
+
+        data.forEach((product) => {
+          container.innerHTML += `
+            <a href="${product.slug}" class="product-card simple">
+              <img src="${product.image}" alt="${product.name}" />
+              <h3>${product.name}</h3>
+              <p>${product.price} kr</p>
+            </a>
+          `;
+        });
+      }
+
+      loadProducts();
     </script>
   </body>
 </html>
