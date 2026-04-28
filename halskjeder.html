@@ -140,13 +140,12 @@
         container.innerHTML = "";
 
         data.forEach((product) => {
-          container.innerHTML += `
-            <a href="${product.slug}" class="product-card simple">
-              <img src="${product.image}" alt="${product.name}" />
-              <h3>${product.name}</h3>
-              <p>${product.price} kr</p>
-            </a>
-          `;
+         container.innerHTML += `
+  <a href="${product.slug}" class="product-card simple">
+    <img src="${product.image}" alt="${product.name}" />
+    <h3>${product.name}</h3>
+  </a>
+`;
         });
       }
 

@@ -1176,3 +1176,6 @@ body {
     object-fit: cover;
   }
 }
+.product-card.simple h3 {
+  margin-bottom: 20px;
+}
