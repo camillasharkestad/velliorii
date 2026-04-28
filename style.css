@@ -949,8 +949,7 @@ body {
   margin-bottom: 80px;
 }
 
-
-  /* MOBILMENY */
+/* MOBILMENY */
 .menu-toggle {
   display: none;
   background: none;
@@ -1043,4 +1042,87 @@ body {
   font-size: 60px;
   font-weight: 300;
   letter-spacing: 5px;
+}
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1002;
+  background-color: #ffffff;
+  display: grid;
+  grid-template-columns: 60px 1fr 60px;
+  align-items: center;
+  padding: 14px 24px;
+}
+
+.header-logo {
+  text-align: center;
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  letter-spacing: 4px;
+  font-size: 28px;
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.site-header .cart-link {
+  justify-content: flex-end;
+}
+
+@media (min-width: 769px) {
+  .site-header .menu-toggle {
+    visibility: hidden;
+  }
+
+  .navbar {
+    top: 60px;
+  }
+}
+
+@media (max-width: 768px) {
+  .top-line {
+    display: none;
+  }
+
+  .site-header {
+    grid-template-columns: 48px 1fr 48px;
+    padding: 16px 20px;
+  }
+
+  .header-logo {
+    font-size: 30px;
+    letter-spacing: 5px;
+  }
+
+  .navbar {
+    position: relative;
+    top: auto;
+    padding: 0;
+  }
+
+  .nav-left {
+    display: none;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background-color: #eee6dc;
+    flex-direction: column;
+    text-align: center;
+    padding: 20px 0;
+    gap: 0;
+    z-index: 1001;
+  }
+
+  .nav-left.active {
+    display: flex;
+  }
+
+  .nav-left a {
+    padding: 14px 0;
+    font-size: 15px;
+  }
+
+  .menu-toggle {
+    display: block;
+  }
 }
