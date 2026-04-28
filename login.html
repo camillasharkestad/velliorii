@@ -4,38 +4,80 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Admin login</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <div class="top-line">
-      <a href="index.html">VELIORII</a>
-    </div>
+    <div id="header"></div>
 
     <section class="product-page">
-      <div class="product-page-container" style="max-width: 500px; margin: 0 auto;">
-        <div class="product-page-info" style="width: 100%;">
+      <div
+        class="product-page-container"
+        style="max-width: 500px; margin: 0 auto"
+      >
+        <div class="product-page-info" style="width: 100%">
           <h1>Logg inn</h1>
 
           <input
             type="email"
             id="email"
             placeholder="E-post"
-            style="width: 100%; padding: 12px; margin-bottom: 12px;"
+            style="width: 100%; padding: 12px; margin-bottom: 12px"
           />
 
           <input
             type="password"
             id="password"
             placeholder="Passord"
-            style="width: 100%; padding: 12px; margin-bottom: 12px;"
+            style="width: 100%; padding: 12px; margin-bottom: 12px"
           />
 
           <button id="login-button" class="buy-button">Logg inn</button>
 
-          <p id="message" style="margin-top: 16px;"></p>
+          <p id="message" style="margin-top: 16px"></p>
         </div>
       </div>
     </section>
+
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+
+          const menuToggle = document.getElementById("menu-toggle");
+          const navMenu = document.getElementById("nav-menu");
+
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const cartCount = document.getElementById("cart-count");
+
+          if (cartCount) {
+            cartCount.textContent = cart.length;
+          }
+        });
+    </script>
 
     <script type="module">
       import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";

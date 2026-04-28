@@ -4,33 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Aveiro øreringer</title>
-    <link rel="stylesheet" href="style.css" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <div class="top-line">
-      <a href="index.html">VELIORII</a>
-    </div>
-
-    <nav class="navbar">
-      <div class="nav-left">
-        <a href="index.html">Forside</a>
-        <a href="alle-smykker.html">Se alle våre smykker</a>
-        <a href="#">Salg</a>
-        <a href="kontakt.html">Kontakt oss</a>
-      </div>
-
-      <div class="nav-right">
-        <a href="handlekurv.html" class="cart-link">
-          🛒 <span id="cart-count">0</span>
-        </a>
-
-        <button id="logout-button">Logg ut</button>
-      </div>
-    </nav>
+    <div id="header"></div>
 
     <section class="product-page">
       <div class="product-page-container">
@@ -44,9 +38,9 @@
           <p class="product-price">399 kr</p>
 
           <p class="product-description">
-            Aveiro øreringer er inspirert av den vakre kystbyen Aveiro, kjent for
-            sine fargerike omgivelser og elegante uttrykk. Smykket kombinerer
-            enkelhet med et sofistikert design.
+            Aveiro øreringer er inspirert av den vakre kystbyen Aveiro, kjent
+            for sine fargerike omgivelser og elegante uttrykk. Smykket
+            kombinerer enkelhet med et sofistikert design.
           </p>
 
           <p class="product-description">
@@ -79,6 +73,30 @@
       <p>© 2026 Smykkebutikk</p>
     </footer>
 
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+
+          const menuToggle = document.getElementById("menu-toggle");
+          const navMenu = document.getElementById("nav-menu");
+
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const cartCount = document.getElementById("cart-count");
+
+          if (cartCount) {
+            cartCount.textContent = cart.length;
+          }
+        });
+    </script>
+
     <script type="module">
       import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
@@ -98,26 +116,12 @@
       async function loadProduct() {
         const stockText = document.getElementById("stock-status");
         const buyButton = document.getElementById("buy-button");
-        const logoutButton = document.getElementById("logout-button");
 
         stockText.textContent = "Laster lagerstatus...";
 
         const {
           data: { user },
         } = await supabase.auth.getUser();
-
-        if (logoutButton) {
-          if (!user) {
-            logoutButton.style.display = "none";
-          } else {
-            logoutButton.style.display = "inline-block";
-          }
-
-          logoutButton.addEventListener("click", async () => {
-            await supabase.auth.signOut();
-            window.location.reload();
-          });
-        }
 
         const { data, error } = await supabase
           .from("Products")
@@ -199,7 +203,6 @@
 
       window.addToCart = addToCart;
 
-      updateCartCount();
       loadProduct();
     </script>
   </body>

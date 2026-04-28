@@ -4,31 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Torino øreringer</title>
-    <link rel="stylesheet" href="style.css" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <div class="top-line">
-      <a href="index.html">VELIORII</a>
-    </div>
-
-    <nav class="navbar">
-      <div class="nav-left">
-        <a href="index.html">Forside</a>
-        <a href="alle-smykker.html">Se alle våre smykker</a>
-        <a href="#">Salg</a>
-        <a href="kontakt.html">Kontakt oss</a>
-      </div>
-
-      <div class="nav-right">
-        <a href="handlekurv.html" class="cart-link">
-          🛒 <span id="cart-count">0</span>
-        </a>
-      </div>
-    </nav>
+    <div id="header"></div>
 
     <section class="product-page">
       <div class="product-page-container">
@@ -42,14 +38,14 @@
           <p class="product-price">399 kr</p>
 
           <p class="product-description">
-            Torino øreringer er elegante og tidløse øredobber med et moderne, men
-            klassisk uttrykk. De passer perfekt både til hverdagsbruk og spesielle
-            anledninger.
+            Torino øreringer er elegante og tidløse øredobber med et moderne,
+            men klassisk uttrykk. De passer perfekt både til hverdagsbruk og
+            spesielle anledninger.
           </p>
 
           <p class="product-description">
-            Bruk dem alene for en minimalistisk stil, eller kombiner dem med andre
-            smykker for et mer personlig uttrykk.
+            Bruk dem alene for en minimalistisk stil, eller kombiner dem med
+            andre smykker for et mer personlig uttrykk.
           </p>
 
           <div class="product-details">
@@ -60,7 +56,9 @@
 
           <button
             class="buy-button"
-            onclick="addToCart('Torino øreringer', 399, 'Images/torino-ore.jpg')"
+            onclick="
+              addToCart('Torino øreringer', 399, 'Images/torino-ore.jpg')
+            "
           >
             Legg i handlekurv
           </button>
@@ -75,13 +73,30 @@
     </footer>
 
     <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+
+          const menuToggle = document.getElementById("menu-toggle");
+          const navMenu = document.getElementById("nav-menu");
+
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          updateCartCount();
+        });
+
       function addToCart(name, price, image) {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
         cart.push({
           name: name,
           price: price,
-          image: image
+          image: image,
         });
 
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -97,8 +112,6 @@
           cartCount.textContent = cart.length;
         }
       }
-
-      updateCartCount();
     </script>
   </body>
 </html>

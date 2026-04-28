@@ -4,44 +4,59 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cesena rosa sommerfugl</title>
-    <link rel="stylesheet" href="style.css" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
+
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
   </head>
+
   <body>
-    <div class="top-line">
-      <a href="index.html">VELIORII</a>
-    </div>
-
-    <nav class="navbar">
-      <div class="nav-left">
-        <a href="index.html">Forside</a>
-        <a href="alle-smykker.html">Se alle våre smykker</a>
-        <a href="#">Salg</a>
-        <a href="kontakt.html">Kontakt oss</a>
-      </div>
-
-      <div class="nav-right">
-        <a href="handlekurv.html" class="cart-link">
-          🛒 <span id="cart-count">0</span>
-        </a>
-      </div>
-    </nav>
+    <div id="header"></div>
 
     <section class="product-page">
       <div class="product-page-container">
-
         <div class="product-gallery">
           <div class="thumbnail-column">
-            <img src="Images/sommerfugl-lys-rosa.jpg" class="thumbnail active" onclick="changeImage(this)" />
-            <img src="Images/sommerfugl-rosa-rosa-stor.jpg" class="thumbnail" onclick="changeImage(this)" />
-            <img src="Images/sommerfugl-rosa-stor.jpg" class="thumbnail" onclick="changeImage(this)" />
+            <img
+              src="Images/sommerfugl-lys-rosa.jpg"
+              class="thumbnail active"
+              onclick="changeImage(this)"
+              alt="Cesena rosa sommerfugl"
+            />
+            <img
+              src="Images/sommerfugl-rosa-rosa-stor.jpg"
+              class="thumbnail"
+              onclick="changeImage(this)"
+              alt="Cesena rosa sommerfugl"
+            />
+            <img
+              src="Images/sommerfugl-rosa-stor.jpg"
+              class="thumbnail"
+              onclick="changeImage(this)"
+              alt="Cesena rosa sommerfugl"
+            />
           </div>
 
           <div class="main-image-container">
-            <img id="main-product-image" src="Images/sommerfugl-lys-rosa.jpg" class="main-product-image" />
+            <img
+              id="main-product-image"
+              src="Images/sommerfugl-lys-rosa.jpg"
+              class="main-product-image"
+              alt="Cesena rosa sommerfugl"
+            />
           </div>
         </div>
 
@@ -70,12 +85,17 @@
 
           <button
             class="buy-button"
-            onclick="addToCart('Cesena rosa sommerfugl', 299, 'Images/sommerfugl-lys-rosa.jpg')"
+            onclick="
+              addToCart(
+                'Cesena rosa sommerfugl',
+                299,
+                'Images/sommerfugl-lys-rosa.jpg',
+              )
+            "
           >
             Legg i handlekurv
           </button>
         </div>
-
       </div>
     </section>
 
@@ -86,13 +106,30 @@
     </footer>
 
     <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+
+          const menuToggle = document.getElementById("menu-toggle");
+          const navMenu = document.getElementById("nav-menu");
+
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          updateCartCount();
+        });
+
       function addToCart(name, price, image) {
         let cart = JSON.parse(localStorage.getItem("cart")) || [];
 
         cart.push({
           name: name,
           price: price,
-          image: image
+          image: image,
         });
 
         localStorage.setItem("cart", JSON.stringify(cart));
@@ -113,14 +150,12 @@
         const mainImage = document.getElementById("main-product-image");
         mainImage.src = thumbnail.src;
 
-        document.querySelectorAll(".thumbnail").forEach(img => {
+        document.querySelectorAll(".thumbnail").forEach((img) => {
           img.classList.remove("active");
         });
 
         thumbnail.classList.add("active");
       }
-
-      updateCartCount();
     </script>
   </body>
 </html>

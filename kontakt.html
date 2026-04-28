@@ -4,17 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Kontakt oss</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
   </head>
-  <body>
-    <div class="top-line">Velkommen til vår hjemmeside</div>
 
-    <nav class="navbar">
-      <a href="index.html">Nyeste kolleksjon</a>
-      <a href="index.html">Se alle våre smykker</a>
-      <a href="index.html">Salg</a>
-      <a href="kontakt.html">Kontakt oss</a>
-    </nav>
+  <body>
+    <div id="header"></div>
 
     <main class="contact-page">
       <h1>Kontakt oss</h1>
@@ -36,5 +46,29 @@
       <p>Tlf: 123 45 678</p>
       <p>© 2026 Smykkebutikk</p>
     </footer>
+
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+
+          const menuToggle = document.getElementById("menu-toggle");
+          const navMenu = document.getElementById("nav-menu");
+
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const cartCount = document.getElementById("cart-count");
+
+          if (cartCount) {
+            cartCount.textContent = cart.length;
+          }
+        });
+    </script>
   </body>
 </html>

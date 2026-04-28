@@ -4,25 +4,27 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Handlekurv</title>
-    <link rel="stylesheet" href="style.css" />
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500;600&display=swap"
       rel="stylesheet"
     />
-  </head>
-  <body>
-    <div class="top-line">
-      <a href="index.html">VELIORII</a>
-    </div>
 
-    <nav class="navbar">
-      <div class="nav-left">
-        <a href="index.html">Forside</a>
-        <a href="alle-smykker.html">Se alle våre smykker</a>
-        <a href="handlekurv.html">Handlekurv</a>
-        <a href="kontakt.html">Kontakt oss</a>
-      </div>
-    </nav>
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="header"></div>
 
     <section class="cart-page">
       <div id="cart-items"></div>
@@ -40,6 +42,34 @@
       <p>© 2026 Smykkebutikk</p>
     </footer>
 
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+
+          const menuToggle = document.getElementById("menu-toggle");
+          const navMenu = document.getElementById("nav-menu");
+
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          updateCartCount();
+        });
+
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+        }
+      }
+    </script>
+
     <script type="module">
       import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
@@ -52,6 +82,8 @@
         const cartItems = document.getElementById("cart-items");
         const cartTotal = document.getElementById("cart-total");
         const cartButtons = document.getElementById("cart-buttons");
+
+        updateCartCount();
 
         if (cart.length === 0) {
           cartItems.innerHTML = `
@@ -145,7 +177,7 @@
                 productCounts[productName] +
                 " i handlekurven, men vi har bare " +
                 data.stock +
-                " igjen."
+                " igjen.",
             );
             return;
           }

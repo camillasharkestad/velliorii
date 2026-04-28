@@ -5,36 +5,26 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Ringer | Velliorii</title>
 
+    <!-- FONTS -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-
     <link
       href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500&display=swap"
       rel="stylesheet"
     />
 
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CSS -->
     <link rel="stylesheet" href="style.css" />
   </head>
 
- <body class="category-page ringer-page">
-    <div class="top-line">
-      <a href="index.html">VELIORII</a>
-    </div>
-
-    <nav class="navbar">
-      <div class="nav-left">
-        <a href="index.html">Hjem</a>
-        <a href="alle-smykker.html">Se alle våre smykker</a>
-        <a href="#">Salg</a>
-        <a href="kontakt.html">Kontakt oss</a>
-      </div>
-
-      <div class="nav-right">
-        <a href="handlekurv.html" class="cart-link">
-          🛒 <span id="cart-count">0</span>
-        </a>
-      </div>
-    </nav>
+  <body class="category-page ringer-page">
+    <div id="header"></div>
 
     <section class="category-banner">
       <img src="Images/rin.jpg" alt="Ringer" />
@@ -128,5 +118,29 @@
         </div>
       </div>
     </footer>
+
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+
+          const menuToggle = document.getElementById("menu-toggle");
+          const navMenu = document.getElementById("nav-menu");
+
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const cartCount = document.getElementById("cart-count");
+
+          if (cartCount) {
+            cartCount.textContent = cart.length;
+          }
+        });
+    </script>
   </body>
 </html>
