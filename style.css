@@ -1044,83 +1044,6 @@ body {
   letter-spacing: 5px;
 }
 
-  .navbar {
-    top: 60px;
-  }
-}
-
-@media (max-width: 768px) {
-  .top-line {
-    display: none;
-  }
-
-  .navbar {
-    position: relative;
-    top: auto;
-    padding: 0;
-  }
-
-  .nav-left {
-    display: none;
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background-color: #eee6dc;
-    flex-direction: column;
-    text-align: center;
-    padding: 20px 0;
-    gap: 0;
-    z-index: 1001;
-  }
-
-  .nav-left.active {
-    display: flex;
-  }
-
-  .nav-left a {
-    padding: 14px 0;
-    font-size: 15px;
-  }
-
-  .menu-toggle {
-    display: block;
-  }
-}
-@media (max-width: 768px) {
-  .top-line {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 14px 20px;
-  }
-
-  .top-line a {
-    margin: 0 auto;
-  }
-
-  .navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: transparent;
-    padding: 0;
-  }
-
-  .menu-toggle {
-    position: absolute;
-    left: 20px;
-    top: 14px;
-    display: block;
-  }
-
-  .nav-right {
-    position: absolute;
-    right: 20px;
-    top: 14px;
-  }
-}
 @media (max-width: 768px) {
   .top-line {
     position: relative;
@@ -1172,12 +1095,49 @@ body {
     display: flex;
   }
 }
+.footer-brand h1 {
+  font-size: clamp(50px, 12vw, 180px);
+}
+
 @media (max-width: 768px) {
   .footer-brand h1 {
     font-size: 48px;
     letter-spacing: -1px;
   }
 }
-.footer-brand h1 {
-  font-size: clamp(50px, 12vw, 180px);
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1002;
+  background-color: #ffffff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.header-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  letter-spacing: 4px;
+  font-size: 28px;
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.site-header .cart-link {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+}
+
+/* Skjul hamburger på desktop */
+@media (min-width: 769px) {
+  .menu-toggle {
+    visibility: hidden;
+  }
 }

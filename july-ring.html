@@ -1,0 +1,253 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>July ring</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
+
+  <body>
+    <div id="header"></div>
+
+    <section class="product-page">
+      <div class="product-page-container">
+        <div class="product-gallery">
+          <div class="thumbnail-column">
+            <img
+              src="Images/pinkring.jpg"
+              class="thumbnail active"
+              onclick="changeImage(this)"
+              alt="July ring bilde 1"
+            />
+            <img
+              src="Images/july-ring4.jpg"
+              class="thumbnail"
+              onclick="changeImage(this)"
+              alt="July ring bilde 2"
+            />
+            <img
+              src="Images/july-ring2.jpg"
+              class="thumbnail"
+              onclick="changeImage(this)"
+              alt="July ring bilde 3"
+            />
+            <img
+              src="Images/july-ring3.jpg"
+              class="thumbnail"
+              onclick="changeImage(this)"
+              alt="July ring bilde 4"
+            />
+          </div>
+
+          <div class="main-image-container">
+            <img
+              id="main-product-image"
+              src="Images/july-ring5.jpg"
+              class="main-product-image"
+              alt="July ring"
+            />
+          </div>
+        </div>
+
+        <div class="product-page-info">
+          <p class="product-category">Ring</p>
+          <h1>July ring</h1>
+          <p class="product-price">499 kr</p>
+
+          <p class="product-description">
+            July ring er en elegant og feminin ring med et stilrent uttrykk. Det
+            tidløse designet gjør den enkel å bruke både alene og sammen med
+            andre smykker.
+          </p>
+
+          <p class="product-description">
+            Ringen passer perfekt til både hverdagsbruk og finere anledninger,
+            og gir antrekket et delikat og eksklusivt preg.
+          </p>
+
+          <div class="product-details">
+            <p><strong>Materiale:</strong> Gullbelagt rustfritt stål</p>
+            <p><strong>Farge:</strong> Gull</p>
+            <p><strong>Størrelse:</strong> Justerbar</p>
+          </div>
+
+          <p id="stock-status"></p>
+
+          <button
+            id="buy-button"
+            class="buy-button"
+            onclick="addToCart('July ring', 499, 'Images/pinkring.jpg')"
+          >
+            Legg i handlekurv
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <footer class="footer">
+      <p>Kontakt oss: kontakt@smykker.no</p>
+      <p>Tlf: 123 45 678</p>
+      <p>© 2026 Smykkebutikk</p>
+    </footer>
+
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+
+          const menuToggle = document.getElementById("menu-toggle");
+          const navMenu = document.getElementById("nav-menu");
+
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const cartCount = document.getElementById("cart-count");
+
+          if (cartCount) {
+            cartCount.textContent = cart.length;
+          }
+        });
+    </script>
+
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+
+      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+      const supabase = createClient(supabaseUrl, supabaseKey);
+
+      function updateCartCount() {
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+        }
+      }
+
+      function changeImage(thumbnail) {
+        const mainImage = document.getElementById("main-product-image");
+
+        if (!mainImage || !thumbnail) return;
+
+        mainImage.src = thumbnail.src;
+
+        document.querySelectorAll(".thumbnail").forEach((img) => {
+          img.classList.remove("active");
+        });
+
+        thumbnail.classList.add("active");
+      }
+
+      async function loadProduct() {
+        const stockText = document.getElementById("stock-status");
+        const buyButton = document.getElementById("buy-button");
+
+        stockText.textContent = "Laster lagerstatus...";
+
+        const {
+          data: { user },
+        } = await supabase.auth.getUser();
+
+        const { data, error } = await supabase
+          .from("Products")
+          .select("name, stock")
+          .eq("name", "July ring")
+          .single();
+
+        if (error) {
+          stockText.textContent = "Feil: " + error.message;
+          return;
+        }
+
+        if (!data) {
+          stockText.textContent = "Produkt ikke funnet";
+          return;
+        }
+
+        if (data.stock <= 0) {
+          stockText.textContent = "Utsolgt";
+          buyButton.textContent = "Utsolgt";
+          buyButton.disabled = true;
+        } else {
+          stockText.textContent = user ? "På lager: " + data.stock : "På lager";
+          buyButton.textContent = "Legg i handlekurv";
+          buyButton.disabled = false;
+        }
+      }
+
+      async function addToCart(name, price, image) {
+        const { data, error } = await supabase
+          .from("Products")
+          .select("stock")
+          .eq("name", name)
+          .single();
+
+        if (error) {
+          alert("Kunne ikke hente lagerstatus.");
+          return;
+        }
+
+        if (!data) {
+          alert("Produkt ikke funnet.");
+          return;
+        }
+
+        const cart = JSON.parse(localStorage.getItem("cart")) || [];
+        const quantityInCart = cart.filter((item) => item.name === name).length;
+
+        if (data.stock <= 0) {
+          alert("Produktet er utsolgt.");
+          loadProduct();
+          return;
+        }
+
+        if (quantityInCart >= data.stock) {
+          alert(
+            "Du kan ikke legge flere i handlekurven. Kun " +
+              data.stock +
+              " på lager.",
+          );
+          return;
+        }
+
+        cart.push({
+          name: name,
+          price: price,
+          image: image,
+        });
+
+        localStorage.setItem("cart", JSON.stringify(cart));
+        updateCartCount();
+        alert(name + " ble lagt i handlekurven");
+      }
+
+      window.addToCart = addToCart;
+      window.changeImage = changeImage;
+
+      loadProduct();
+    </script>
+  </body>
+</html>
