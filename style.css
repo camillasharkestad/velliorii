@@ -1231,3 +1231,17 @@ body {
     object-fit: cover;
   }
 }
+@media (max-width: 600px) {
+  .all-products-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 14px;
+  }
+
+  .all-products-grid img,
+  .product-card.simple img {
+    width: 100%;
+    aspect-ratio: 1 / 1; /* gjør firkantet */
+    height: auto; /* stopper stretching */
+    object-fit: cover;
+  }
+}
