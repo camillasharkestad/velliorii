@@ -619,6 +619,12 @@ body {
     grid-template-columns: 1fr;
   }
 
+  /* 👇 OVERRIDER KUN FOR FORSIDEN */
+  .main-categories {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
   .hero {
     height: 260px;
     background-attachment: scroll;
@@ -1156,5 +1162,17 @@ body {
   .main-categories .image-wrapper img {
     aspect-ratio: 1 / 1;
     height: auto;
+  }
+}
+@media (max-width: 600px) {
+  .category-page .product-grid-5 {
+    grid-template-columns: repeat(2, 1fr) !important;
+    gap: 14px;
+  }
+
+  .category-page .product-card.simple img {
+    aspect-ratio: 1 / 1;
+    height: auto;
+    object-fit: cover;
   }
 }
