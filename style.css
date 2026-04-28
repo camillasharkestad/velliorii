@@ -1178,3 +1178,6 @@ body {
     letter-spacing: -1px;
   }
 }
+.footer-brand h1 {
+  font-size: clamp(50px, 12vw, 180px);
+}
