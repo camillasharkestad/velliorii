@@ -30,7 +30,7 @@ Deno.serve(async (req) => {
     --data '{"name":"Functions"}'
 
 */
-import { serve } from "https://deno.land/std/http/server.ts";
+import { serve } from "https://deno.land/std@0.224.0/http/server.ts";
 
 serve(async (_req) => {
   const RESEND_API_KEY = Deno.env.get("RESEND_API_KEY");

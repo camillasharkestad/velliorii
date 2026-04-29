@@ -1245,3 +1245,8 @@ body {
     object-fit: cover;
   }
 }
+img {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
