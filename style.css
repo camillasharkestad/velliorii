@@ -1218,6 +1218,7 @@ body {
   padding-top: 0;
   margin-top: 0;
 }
+}
 
 @media (max-width: 600px) {
   .all-products-grid {

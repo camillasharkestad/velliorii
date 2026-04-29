@@ -1,49 +1,68 @@
-<script type="module">
-  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <title>Halskjeder</title>
 
-  const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
-  const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
-  const supabase = createClient(supabaseUrl, supabaseKey);
+    <!-- CSS din -->
+    <link rel="stylesheet" href="styles.css" />
+  </head>
 
-  async function loadProducts() {
-    const container = document.getElementById("product-container");
+  <body>
+    <!-- Tittel -->
+    <section class="products category-page">
+      <h2>Halskjeder</h2>
 
-    const { data, error } = await supabase
-      .from("Products")
-      .select("name, slug, price, image, category, active, id")
-      .eq("category", "halskjeder")
-      .eq("active", true)
-      .order("id", { ascending: true });
+      <!-- 🔴 VIKTIG: Denne MÅ være der -->
+      <div id="product-container" class="product-grid-5"></div>
+    </section>
 
-    if (error) {
-      console.error("Feil ved henting av produkter:", error);
-      container.innerHTML = "<p>Kunne ikke laste produkter.</p>";
-      return;
-    }
+    <!-- SCRIPT -->
+    <script type="module">
+      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-    if (!data || data.length === 0) {
-      container.innerHTML = "<p>Ingen produkter funnet.</p>";
-      return;
-    }
+      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+      const supabase = createClient(supabaseUrl, supabaseKey);
 
-    // Bygg HTML først (bedre performance)
-    let html = "";
+      async function loadProducts() {
+        const container = document.getElementById("product-container");
 
-    data.forEach((product) => {
-      console.log("Produkt:", product.name);
-      console.log("Bilde:", product.image);
+        // 🔴 EKSTRA SIKKERHET
+        if (!container) {
+          console.error("Fant ikke product-container i HTML!");
+          return;
+        }
 
-      html += `
-        <a href="${product.slug}" class="product-card simple">
-          <img src="${product.image || "placeholder.jpg"}" alt="${product.name}" />
-          <h3>${product.name}</h3>
-          <p class="price">${product.price} kr</p>
-        </a>
-      `;
-    });
+        const { data, error } = await supabase
+          .from("Products")
+          .select("name, slug, price, image, category, active, id")
+          .eq("category", "halskjeder")
+          .eq("active", true)
+          .order("id", { ascending: true });
 
-    container.innerHTML = html;
-  }
+        if (error) {
+          console.error("Feil:", error);
+          container.innerHTML = "<p>Kunne ikke laste produkter.</p>";
+          return;
+        }
 
-  loadProducts();
-</script>
+        let html = "";
+
+        data.forEach((product) => {
+          html += `
+          <a href="${product.slug}.html" class="product-card simple">
+            <img src="${product.image}" alt="${product.name}">
+            <h3>${product.name}</h3>
+            <p>${product.price} kr</p>
+          </a>
+        `;
+        });
+
+        container.innerHTML = html;
+      }
+
+      loadProducts();
+    </script>
+  </body>
+</html>
