@@ -1216,3 +1216,60 @@ body {
     height: 320px;
   }
 }
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1002;
+  background-color: #ffffff;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 24px;
+}
+
+.header-logo {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  letter-spacing: 4px;
+  font-size: 28px;
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.header-logo:visited,
+.header-logo:hover,
+.header-logo:active {
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.site-header .cart-link {
+  margin-left: auto;
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #2f2a26;
+}
+
+.site-header .cart-link:visited,
+.site-header .cart-link:hover,
+.site-header .cart-link:active {
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.cart-link i {
+  color: #2f2a26;
+}
+
+@media (min-width: 769px) {
+  .menu-toggle {
+    visibility: hidden;
+  }
+}
+}
