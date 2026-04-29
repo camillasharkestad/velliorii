@@ -1,155 +1,49 @@
-<!doctype html>
-<html lang="no">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Halskjeder | Velliorii</title>
+<script type="module">
+  import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
-    <link rel="preconnect" href="https://fonts.googleapis.com" />
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
+  const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
+  const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
+  const supabase = createClient(supabaseUrl, supabaseKey);
 
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-    />
+  async function loadProducts() {
+    const container = document.getElementById("product-container");
 
-    <link rel="stylesheet" href="style.css" />
-  </head>
+    const { data, error } = await supabase
+      .from("Products")
+      .select("name, slug, price, image, category, active, id")
+      .eq("category", "halskjeder")
+      .eq("active", true)
+      .order("id", { ascending: true });
 
-  <body class="category-page">
-    <div id="header"></div>
+    if (error) {
+      console.error("Feil ved henting av produkter:", error);
+      container.innerHTML = "<p>Kunne ikke laste produkter.</p>";
+      return;
+    }
 
-    <section class="products">
-      <h2>HALSKJEDER</h2>
+    if (!data || data.length === 0) {
+      container.innerHTML = "<p>Ingen produkter funnet.</p>";
+      return;
+    }
 
-      <div class="product-grid-5" id="product-container">
-        <p>Laster produkter...</p>
-      </div>
-    </section>
+    // Bygg HTML først (bedre performance)
+    let html = "";
 
-    <footer class="footer-luxury">
-      <div class="footer-top">
-        <div class="footer-newsletter">
-          <h2>BLI EN VELLIORII INSIDER</h2>
-          <p>
-            Meld deg på vårt nyhetsbrev og få tidlig tilgang, inspirasjon og
-            eksklusive fordeler.
-          </p>
+    data.forEach((product) => {
+      console.log("Produkt:", product.name);
+      console.log("Bilde:", product.image);
 
-          <form id="footer-newsletter-form" class="footer-form">
-            <input type="email" placeholder="E-postadresse" required />
-            <button type="submit">→</button>
-          </form>
-        </div>
+      html += `
+        <a href="${product.slug}" class="product-card simple">
+          <img src="${product.image || "placeholder.jpg"}" alt="${product.name}" />
+          <h3>${product.name}</h3>
+          <p class="price">${product.price} kr</p>
+        </a>
+      `;
+    });
 
-        <div class="footer-links">
-          <div>
-            <h3>KUNDESERVICE</h3>
-            <a href="#">FAQ</a>
-            <a href="#">Bytte & retur</a>
-            <a href="#">Frakt</a>
-            <a href="kontakt.html">Kontakt oss</a>
-          </div>
+    container.innerHTML = html;
+  }
 
-          <div>
-            <h3>RESSURSER</h3>
-            <a href="#">Min konto</a>
-            <a href="#">Fraktpolicy</a>
-            <a href="#">Returpolicy</a>
-            <a href="#">Personvern</a>
-          </div>
-
-          <div>
-            <h3>OM OSS</h3>
-            <a href="om-oss.html">Om Velliorii</a>
-            <a href="#">Samarbeid</a>
-            <a href="alle-smykker.html">Våre smykker</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-brand">
-        <h1>VELLIORII</h1>
-      </div>
-
-      <div class="footer-bottom">
-        <p>© 2026 Velliorii</p>
-        <div class="footer-socials">
-          <a href="#">Instagram</a>
-          <a href="#">TikTok</a>
-        </div>
-      </div>
-    </footer>
-
-    <script>
-      fetch("header.html")
-        .then((response) => response.text())
-        .then((data) => {
-          document.getElementById("header").innerHTML = data;
-
-          const menuToggle = document.getElementById("menu-toggle");
-          const navMenu = document.getElementById("nav-menu");
-
-          if (menuToggle && navMenu) {
-            menuToggle.addEventListener("click", () => {
-              navMenu.classList.toggle("active");
-            });
-          }
-
-          const cart = JSON.parse(localStorage.getItem("cart")) || [];
-          const cartCount = document.getElementById("cart-count");
-
-          if (cartCount) {
-            cartCount.textContent = cart.length;
-          }
-        });
-    </script>
-
-    <script type="module">
-      import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
-
-      const supabaseUrl = "https://amhxnojzpplpfqvxdvug.supabase.co";
-      const supabaseKey = "sb_publishable_8gvjzFpSO__9nLfw7lgFHA_eIN2psmW";
-      const supabase = createClient(supabaseUrl, supabaseKey);
-
-      async function loadProducts() {
-        const container = document.getElementById("product-container");
-
-        const { data, error } = await supabase
-          .from("Products")
-          .select("name, slug, price, image, category, active, id")
-          .eq("category", "halskjeder")
-          .eq("active", true)
-          .order("id", { ascending: true });
-
-        if (error) {
-          console.error("Feil ved henting av produkter:", error);
-          container.innerHTML = "<p>Kunne ikke laste produkter.</p>";
-          return;
-        }
-
-        if (!data || data.length === 0) {
-          container.innerHTML = "<p>Ingen produkter funnet.</p>";
-          return;
-        }
-
-        container.innerHTML = "";
-
-        data.forEach((product) => {
-         container.innerHTML += `
-  <a href="${product.slug}" class="product-card simple">
-    <img src="${product.image}" alt="${product.name}" />
-    <h3>${product.name}</h3>
-  </a>
-`;
-        });
-      }
-
-      loadProducts();
-    </script>
-  </body>
-</html>
+  loadProducts();
+</script>
