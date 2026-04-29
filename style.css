@@ -974,30 +974,51 @@ body {
     text-align: center;
   }
 
+  @media (max-width: 768px) {
+  .top-line {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 18px 60px;
+  }
+
   .top-line a {
     font-size: 32px;
     letter-spacing: 5px;
   }
 
   .navbar {
-    position: relative;
-    top: auto;
-    z-index: 1001;
-    background-color: #eee6dc;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 18px 24px;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    background: transparent;
+    padding: 0;
+    z-index: 1003;
   }
 
   .menu-toggle {
     display: block;
+    position: absolute;
+    left: 20px;
+    top: 18px;
+    z-index: 1004;
+  }
+
+  .nav-right {
+    display: flex;
+    position: absolute;
+    right: 20px;
+    top: 18px;
+    z-index: 1004;
+    min-width: auto;
   }
 
   .nav-left {
     display: none;
     position: absolute;
-    top: 100%;
+    top: 64px;
     left: 0;
     width: 100%;
     background-color: #eee6dc;
@@ -1014,12 +1035,6 @@ body {
   .nav-left a {
     padding: 14px 0;
     font-size: 15px;
-  }
-
-  .nav-right {
-    display: flex;
-    justify-content: flex-end;
-    min-width: auto;
   }
 }
 
@@ -1049,57 +1064,6 @@ body {
   letter-spacing: 5px;
 }
 
-@media (max-width: 768px) {
-  .top-line {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 18px 60px;
-  }
-
-  .navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: transparent;
-    padding: 0;
-    z-index: 1003;
-  }
-
-  .menu-toggle {
-    display: block;
-    position: absolute;
-    left: 20px;
-    top: 18px;
-    z-index: 1004;
-  }
-
-  .nav-right {
-    display: flex;
-    position: absolute;
-    right: 20px;
-    top: 18px;
-    z-index: 1004;
-  }
-
-  .nav-left {
-    display: none;
-    position: absolute;
-    top: 64px;
-    left: 0;
-    width: 100%;
-    background-color: #eee6dc;
-    flex-direction: column;
-    text-align: center;
-    padding: 20px 0;
-  }
-
-  .nav-left.active {
-    display: flex;
-  }
-}
 .footer-brand h1 {
   font-size: clamp(50px, 12vw, 180px);
 }
@@ -1110,6 +1074,7 @@ body {
     letter-spacing: -1px;
   }
 }
+
 .site-header {
   position: sticky;
   top: 0;
@@ -1140,48 +1105,30 @@ body {
   align-items: center;
 }
 
-/* Skjul hamburger på desktop */
 @media (min-width: 769px) {
   .menu-toggle {
     visibility: hidden;
   }
 }
+
 .cart-link i {
-  color: #2f2a26; /* mørk grå (samme som resten av teksten din) */
+  color: #2f2a26;
 }
+
 .cart-link:hover i {
   opacity: 0.7;
 }
+
 @media (max-width: 600px) {
   .main-categories {
     grid-template-columns: repeat(2, 1fr);
   }
-}
-@media (max-width: 600px) {
+
   .main-categories .image-wrapper img {
     aspect-ratio: 1 / 1;
     height: auto;
   }
-}
-@media (max-width: 600px) {
-  .category-page .product-grid-5 {
-    grid-template-columns: repeat(2, 1fr) !important;
-    gap: 14px;
-  }
 
-  .category-page .product-card.simple img {
-    aspect-ratio: 1 / 1;
-    height: auto;
-    object-fit: cover;
-  }
-}
-.product-card.simple h3 {
-  margin-bottom: 20px;
-}
-/* ===== MOBIL (UNDER 600px) ===== */
-@media (max-width: 600px) {
-
-  /* Produktside */
   .product-page {
     padding: 25px 14px;
   }
@@ -1222,20 +1169,12 @@ body {
     margin-top: 0;
   }
 
-  /* Produkt-grid (alle sider) */
-  .all-products-grid {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-
-  /* Halskjeder / category page */
+  .all-products-grid,
   .category-page .product-grid-5 {
-    display: grid;
     grid-template-columns: repeat(2, 1fr);
     gap: 14px;
   }
 
-  /* Bilder (VIKTIG) */
   .all-products-grid img,
   .product-card.simple img,
   .category-page .product-card.simple img {
@@ -1251,8 +1190,29 @@ body {
   }
 }
 
-/* GENERELT */
-img {
-  max-width: 100%;
+.product-card.simple h3 {
+  margin-bottom: 20px;
+}
+
+/* Karusell - behold normal størrelse */
+.inspirasjon-gallery img {
+  flex: 0 0 calc((100% - 60px) / 4);
+  height: 420px;
+  width: auto;
+  object-fit: cover;
   display: block;
+}
+
+@media (max-width: 900px) {
+  .inspirasjon-gallery img {
+    flex: 0 0 calc((100% - 20px) / 2);
+    height: 320px;
+  }
+}
+
+@media (max-width: 600px) {
+  .inspirasjon-gallery img {
+    flex: 0 0 100%;
+    height: 320px;
+  }
 }
