@@ -625,57 +625,53 @@ body {
   }
 }
 
-.hero {
-  height: 260px;
-  background-attachment: scroll;
-}
-
-.navbar {
-  gap: 20px;
-  padding: 14px;
-}
-
-.large-images {
-  padding: 20px;
-}
-
-.large-image-card img {
-  height: 350px;
-}
-
-.inspirasjon-wrapper {
-  padding: 0 20px;
-}
-
 @media (max-width: 600px) {
+  .hero {
+    height: 260px;
+    background-attachment: scroll;
+  }
+
+  .navbar {
+    gap: 20px;
+    padding: 14px;
+  }
+
+  .large-images {
+    padding: 20px;
+  }
+
+  .large-image-card img {
+    height: 350px;
+  }
+
+  .inspirasjon-wrapper {
+    padding: 0 20px;
+  }
+
   .inspirasjon-gallery img {
     flex: 0 0 100%;
     height: 320px;
   }
-}
 
-.product-gallery {
-  flex-direction: column;
-}
+  .product-gallery {
+    flex-direction: column;
+  }
 
-.thumbnail-column {
-  flex-direction: row;
-  flex-wrap: wrap;
-}
+  .thumbnail-column {
+    flex-direction: row;
+    flex-wrap: wrap;
+  }
 
-.thumbnail {
-  width: 75px;
-  height: 75px;
-}
+  .thumbnail {
+    width: 75px;
+    height: 75px;
+  }
 
-.product-gallery .main-product-image {
-  width: 100%;
-  height: auto;
-}
-
-.product-page-image img {
-  width: 100%;
-  height: auto;
+  .product-gallery .main-product-image,
+  .product-page-image img {
+    width: 100%;
+    height: auto;
+  }
 }
 .video-section {
   display: flex;
@@ -990,23 +986,6 @@ body {
     z-index: 1003;
   }
 
-  .menu-toggle {
-    display: block;
-    position: absolute;
-    left: 20px;
-    top: 18px;
-    z-index: 1004;
-  }
-
-  .nav-right {
-    display: flex;
-    position: absolute;
-    right: 20px;
-    top: 18px;
-    z-index: 1004;
-    min-width: auto;
-  }
-
   .nav-left {
     display: none;
     position: absolute;
@@ -1319,5 +1298,37 @@ body {
 
     height: 40px;
     line-height: 1;
+  }
+}
+.halskjeder-page .category-banner img {
+  object-position: center center;
+}
+@media (max-width: 768px) {
+  .site-header {
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+    padding: 0 16px;
+  }
+
+  .site-header .header-logo {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .site-header .menu-toggle {
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+  }
+
+  .site-header .cart-link {
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
   }
 }
