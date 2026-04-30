@@ -647,9 +647,11 @@ body {
   padding: 0 20px;
 }
 
-.inspirasjon-gallery img {
-  flex: 0 0 100%;
-  height: 320px;
+@media (max-width: 600px) {
+  .inspirasjon-gallery img {
+    flex: 0 0 100%;
+    height: 320px;
+  }
 }
 
 .product-gallery {
@@ -964,16 +966,6 @@ body {
   color: #2f2a26;
 }
 
-@media (max-width: 768px) {
-  .top-line {
-    position: relative;
-    top: auto;
-    z-index: 1002;
-    background-color: #ffffff;
-    padding: 18px 0;
-    text-align: center;
-  }
-
   @media (max-width: 768px) {
   .top-line {
     position: relative;
@@ -1075,42 +1067,74 @@ body {
   }
 }
 
+/* ===== HEADER (RYDDIG OG STABIL) ===== */
+
 .site-header {
   position: sticky;
   top: 0;
   z-index: 1002;
   background-color: #ffffff;
   height: 60px;
-  display: flex;
+
+  display: grid;
+  grid-template-columns: 1fr auto 1fr;
   align-items: center;
-  justify-content: space-between;
+
   padding: 0 24px;
 }
 
-.header-logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+/* VENSTRE: meny */
+.site-header .menu-toggle {
+  grid-column: 1;
+  justify-self: start;
+
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #2f2a26;
+}
+
+/* MIDTEN: logo */
+.site-header .header-logo {
+  grid-column: 2;
+  justify-self: center;
+
   font-family: "Cormorant Garamond", serif;
   font-weight: 300;
   letter-spacing: 4px;
   font-size: 28px;
+  text-transform: uppercase;
+
   color: #2f2a26;
   text-decoration: none;
 }
 
+/* HØYRE: handlekurv */
 .site-header .cart-link {
-  margin-left: auto;
+  grid-column: 3;
+  justify-self: end;
+
   display: flex;
   align-items: center;
+  gap: 6px;
+
+  color: #2f2a26;
+  text-decoration: none;
 }
 
-@media (min-width: 769px) {
-  .menu-toggle {
-    visibility: hidden;
-  }
+/* FIKSER LILLA/BLÅ LENKER */
+.site-header .header-logo:visited,
+.site-header .header-logo:hover,
+.site-header .header-logo:active,
+.site-header .cart-link:visited,
+.site-header .cart-link:hover,
+.site-header .cart-link:active {
+  color: #2f2a26;
+  text-decoration: none;
 }
 
+/* ikon */
 .cart-link i {
   color: #2f2a26;
 }
@@ -1119,192 +1143,11 @@ body {
   opacity: 0.7;
 }
 
-@media (max-width: 600px) {
-  .main-categories {
-    grid-template-columns: repeat(2, 1fr);
-  }
-
-  .main-categories .image-wrapper img {
-    aspect-ratio: 1 / 1;
-    height: auto;
-  }
-
-  .product-page {
-    padding: 25px 14px;
-  }
-
-  .product-page-container {
-    gap: 16px;
-  }
-
-  .product-gallery {
-    flex-direction: row;
-    gap: 10px;
-    width: 100%;
-    flex: none;
-  }
-
-  .thumbnail-column {
-    flex-direction: column;
-    flex-wrap: nowrap;
-    gap: 8px;
-  }
-
-  .thumbnail {
-    width: 58px;
-    height: 58px;
-  }
-
-  .product-gallery .main-image-container {
-    flex: 1;
-  }
-
-  .product-gallery .main-product-image {
-    width: 100%;
-    height: auto;
-  }
-
-  .product-page-info {
-    padding-top: 0;
-    margin-top: 0;
-  }
-
-  .all-products-grid,
-  .category-page .product-grid-5 {
-    grid-template-columns: repeat(2, 1fr);
-    gap: 14px;
-  }
-
-  .all-products-grid img,
-  .product-card.simple img,
-  .category-page .product-card.simple img {
-    width: 100%;
-    aspect-ratio: 1 / 1;
-    height: auto;
-    object-fit: cover;
-    display: block;
-  }
-
-  .product-card.simple {
-    display: block;
-  }
-}
-
-.product-card.simple h3 {
-  margin-bottom: 20px;
-}
-
-/* Karusell - behold normal størrelse */
-.inspirasjon-gallery img {
-  flex: 0 0 calc((100% - 60px) / 4);
-  height: 420px;
-  width: auto;
-  object-fit: cover;
-  display: block;
-}
-
-@media (max-width: 900px) {
-  .inspirasjon-gallery img {
-    flex: 0 0 calc((100% - 20px) / 2);
-    height: 320px;
-  }
-}
-
-@media (max-width: 600px) {
-  .inspirasjon-gallery img {
-    flex: 0 0 100%;
-    height: 320px;
-  }
-}
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1002;
-  background-color: #ffffff;
-  height: 60px;
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 0 24px;
-}
-
-.header-logo {
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 300;
-  letter-spacing: 4px;
-  font-size: 28px;
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-.header-logo:visited,
-.header-logo:hover,
-.header-logo:active {
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-.site-header .cart-link {
-  margin-left: auto;
-  display: flex;
-  align-items: center;
-  text-decoration: none;
-  color: #2f2a26;
-}
-
-.site-header .cart-link:visited,
-.site-header .cart-link:hover,
-.site-header .cart-link:active {
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-.cart-link i {
-  color: #2f2a26;
-}
-
+/* Desktop: skjul hamburger */
 @media (min-width: 769px) {
   .menu-toggle {
     visibility: hidden;
   }
-}
-/* ===== HEADER FIX (safe override) ===== */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1002;
-  background-color: #ffffff;
-  height: 60px;
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-  padding: 0 24px;
-}
-
-.site-header .menu-toggle {
-  grid-column: 1;
-  justify-self: start;
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: #2f2a26;
-  cursor: pointer;
-}
-
-.site-header .header-logo {
-  grid-column: 2;
-  justify-self: center;
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 300;
-  letter-spacing: 4px;
-  font-size: 28px;
-  text-transform: uppercase;
-  color: #2f2a26;
-  text-decoration: none;
 }
 
 .site-header .header-logo:visited,
@@ -1358,5 +1201,123 @@ body {
 
   .navbar {
     top: 60px;
+  }
+}
+/* HEADER FINAL FIX */
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 1002;
+  background-color: #ffffff;
+  height: 60px;
+  padding: 0 24px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+/* logo midt */
+.site-header .header-logo {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  letter-spacing: 4px;
+  font-size: 28px;
+  text-transform: uppercase;
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+/* handlekurv høyre */
+.site-header .cart-link {
+  position: absolute;
+  right: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+/* meny venstre */
+.site-header .menu-toggle {
+  position: absolute;
+  left: 24px;
+
+  background: none;
+  border: none;
+  font-size: 28px;
+  cursor: pointer;
+  color: #2f2a26;
+}
+
+/* farger på linker */
+.site-header .header-logo:visited,
+.site-header .header-logo:hover,
+.site-header .header-logo:active,
+.site-header .cart-link:visited,
+.site-header .cart-link:hover,
+.site-header .cart-link:active {
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.site-header .cart-link i {
+  color: #2f2a26;
+}
+
+/* desktop: skjul hamburger */
+@media (min-width: 769px) {
+  .site-header .menu-toggle {
+    visibility: hidden;
+  }
+}
+/* MOBIL HEADER FIX */
+@media (max-width: 768px) {
+  .site-header {
+    height: 60px;
+    padding: 0 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: sticky;
+  }
+
+  .site-header .header-logo {
+    line-height: 60px;
+    font-size: 28px;
+  }
+
+  .site-header .menu-toggle {
+    visibility: visible;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    height: 40px;
+    width: 40px;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .site-header .cart-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: absolute;
+    right: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    height: 40px;
+    line-height: 1;
   }
 }

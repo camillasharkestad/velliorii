@@ -2,22 +2,116 @@
 <html lang="no">
   <head>
     <meta charset="UTF-8" />
-    <title>Halskjeder</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Halskjeder | Velliorii</title>
 
-    <!-- CSS din -->
-    <link rel="stylesheet" href="styles.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <link rel="stylesheet" href="style.css" />
   </head>
 
-  <body>
-    <!-- Tittel -->
-    <section class="products category-page">
-      <h2>Halskjeder</h2>
+  <body class="category-page halskjeder-page">
+    <div id="header"></div>
 
-      <!-- 🔴 VIKTIG: Denne MÅ være der -->
-      <div id="product-container" class="product-grid-5"></div>
+    <section class="category-banner">
+      <img src="Images/halskjede-ring-perle.jpg" alt="Halskjeder" />
+      <h1>HALSKJEDER</h1>
     </section>
 
-    <!-- SCRIPT -->
+    <section class="products">
+      <div class="product-grid-5" id="product-container">
+        <p>Laster produkter...</p>
+      </div>
+    </section>
+
+    <footer class="footer-luxury">
+      <div class="footer-top">
+        <div class="footer-newsletter">
+          <h2>BLI EN VELLIORII INSIDER</h2>
+          <p>
+            Meld deg på vårt nyhetsbrev og få tidlig tilgang, inspirasjon og
+            eksklusive fordeler.
+          </p>
+
+          <form id="footer-newsletter-form" class="footer-form">
+            <input type="email" placeholder="E-postadresse" required />
+            <button type="submit">→</button>
+          </form>
+        </div>
+
+        <div class="footer-links">
+          <div>
+            <h3>KUNDESERVICE</h3>
+            <a href="#">FAQ</a>
+            <a href="#">Bytte & retur</a>
+            <a href="#">Frakt</a>
+            <a href="kontakt.html">Kontakt oss</a>
+          </div>
+
+          <div>
+            <h3>RESSURSER</h3>
+            <a href="#">Min konto</a>
+            <a href="#">Fraktpolicy</a>
+            <a href="#">Returpolicy</a>
+            <a href="#">Personvern</a>
+          </div>
+
+          <div>
+            <h3>OM OSS</h3>
+            <a href="om-oss.html">Om Velliorii</a>
+            <a href="#">Samarbeid</a>
+            <a href="alle-smykker.html">Våre smykker</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="footer-brand">
+        <h1>VELLIORII</h1>
+      </div>
+
+      <div class="footer-bottom">
+        <p>© 2026 Velliorii</p>
+        <div class="footer-socials">
+          <a href="#">Instagram</a>
+          <a href="#">TikTok</a>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      fetch("header.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.getElementById("header").innerHTML = data;
+
+          const menuToggle = document.getElementById("menu-toggle");
+          const navMenu = document.getElementById("nav-menu");
+
+          if (menuToggle && navMenu) {
+            menuToggle.addEventListener("click", () => {
+              navMenu.classList.toggle("active");
+            });
+          }
+
+          const cart = JSON.parse(localStorage.getItem("cart")) || [];
+          const cartCount = document.getElementById("cart-count");
+
+          if (cartCount) {
+            cartCount.textContent = cart.length;
+          }
+        });
+    </script>
+
     <script type="module">
       import { createClient } from "https://cdn.jsdelivr.net/npm/@supabase/supabase-js/+esm";
 
@@ -28,9 +122,8 @@
       async function loadProducts() {
         const container = document.getElementById("product-container");
 
-        // 🔴 EKSTRA SIKKERHET
         if (!container) {
-          console.error("Fant ikke product-container i HTML!");
+          console.error("Fant ikke product-container.");
           return;
         }
 
@@ -42,24 +135,26 @@
           .order("id", { ascending: true });
 
         if (error) {
-          console.error("Feil:", error);
+          console.error("Feil ved henting av produkter:", error);
           container.innerHTML = "<p>Kunne ikke laste produkter.</p>";
           return;
         }
 
-        let html = "";
+        if (!data || data.length === 0) {
+          container.innerHTML = "<p>Ingen produkter funnet.</p>";
+          return;
+        }
+
+        container.innerHTML = "";
 
         data.forEach((product) => {
-          html += `
-          <a href="${product.slug}.html" class="product-card simple">
-            <img src="${product.image}" alt="${product.name}">
-            <h3>${product.name}</h3>
-            <p>${product.price} kr</p>
-          </a>
-        `;
+          container.innerHTML += `
+            <a href="${product.slug}" class="product-card simple">
+              <img src="${product.image}" alt="${product.name}" />
+              <h3>${product.name}</h3>
+            </a>
+          `;
         });
-
-        container.innerHTML = html;
       }
 
       loadProducts();
