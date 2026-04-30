@@ -1332,3 +1332,17 @@ body {
     transform: translateY(-50%);
   }
 }
+.hero {
+  height: 500px;
+  background-image: url("Images/Smykker-banner.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+}
+
+@media (max-width: 600px) {
+  .hero {
+    height: 260px;
+    background-attachment: scroll;
+  }
+}
