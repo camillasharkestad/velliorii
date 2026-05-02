@@ -962,53 +962,6 @@ body {
   color: #2f2a26;
 }
 
-  @media (max-width: 768px) {
-  .top-line {
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 18px 60px;
-  }
-
-  .top-line a {
-    font-size: 32px;
-    letter-spacing: 5px;
-  }
-
-  .navbar {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    background: transparent;
-    padding: 0;
-    z-index: 1003;
-  }
-
-  .nav-left {
-    display: none;
-    position: absolute;
-    top: 64px;
-    left: 0;
-    width: 100%;
-    background-color: #eee6dc;
-    flex-direction: column;
-    text-align: center;
-    padding: 20px 0;
-    gap: 0;
-  }
-
-  .nav-left.active {
-    display: flex;
-  }
-
-  .nav-left a {
-    padding: 14px 0;
-    font-size: 15px;
-  }
-}
-
 .category-banner {
   position: relative;
   width: 100%;
@@ -1344,5 +1297,34 @@ body {
   .hero {
     height: 260px;
     background-attachment: scroll;
+  }
+}
+/* MOBIL-FIKS FOR HANDLEKURV */
+@media (max-width: 768px) {
+  .navbar {
+    position: sticky !important;
+    top: 60px !important;
+    left: auto !important;
+    width: 100% !important;
+  }
+
+  .navbar .nav-right {
+    display: none !important;
+  }
+
+  .site-header .cart-link {
+    position: absolute !important;
+    right: 16px !important;
+    left: auto !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+  }
+
+  .site-header .menu-toggle {
+    position: absolute !important;
+    left: 16px !important;
+    right: auto !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
   }
 }
