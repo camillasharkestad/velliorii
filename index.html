@@ -39,24 +39,24 @@
 
   <body>
     <header class="site-header">
-  <button class="menu-toggle" id="menu-toggle">☰</button>
+      <button class="menu-toggle" id="menu-toggle">☰</button>
 
-  <a href="index.html" class="header-logo">VELLIORII</a>
+      <a href="index.html" class="header-logo">VELLIORII</a>
 
-  <a href="handlekurv.html" class="cart-link">
-    <i class="fa-solid fa-bag-shopping"></i>
-    <span id="cart-count">0</span>
-  </a>
-</header>
+      <a href="handlekurv.html" class="cart-link">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span id="cart-count">0</span>
+      </a>
+    </header>
 
-<nav class="navbar">
-  <div class="nav-left" id="nav-menu">
-    <a href="#">Nyeste kolleksjon</a>
-    <a href="alle-smykker.html">Se alle våre smykker</a>
-    <a href="#">Salg</a>
-    <a href="kontakt.html">Kontakt oss</a>
-  </div>
-</nav>
+    <nav class="navbar">
+      <div class="nav-left" id="nav-menu">
+        <a href="#">Nyeste kolleksjon</a>
+        <a href="alle-smykker.html">Se alle våre smykker</a>
+        <a href="#">Salg</a>
+        <a href="kontakt.html">Kontakt oss</a>
+      </div>
+    </nav>
 
     <section class="hero"></section>
 
@@ -287,79 +287,96 @@
       const leftBtn = document.querySelector(".carousel-btn.left");
       const rightBtn = document.querySelector(".carousel-btn.right");
 
-      rightBtn.addEventListener("click", () => {
-        gallery.scrollBy({
-          left: 320,
-          behavior: "smooth",
+      if (gallery && leftBtn && rightBtn) {
+        rightBtn.addEventListener("click", () => {
+          gallery.scrollBy({
+            left: 320,
+            behavior: "smooth",
+          });
         });
-      });
 
-      leftBtn.addEventListener("click", () => {
-        gallery.scrollBy({
-          left: -320,
-          behavior: "smooth",
+        leftBtn.addEventListener("click", () => {
+          gallery.scrollBy({
+            left: -320,
+            behavior: "smooth",
+          });
         });
-      });
+      }
     </script>
 
     <script type="module">
       const form = document.getElementById("newsletter-form");
       const message = document.getElementById("newsletter-message");
 
-      form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+      if (form && message) {
+        form.addEventListener("submit", async (e) => {
+          e.preventDefault();
 
-        const email = document.getElementById("email").value.trim();
-        message.textContent = "";
-        message.style.color = "black";
+          const email = document.getElementById("email").value.trim();
+          message.textContent = "";
+          message.style.color = "black";
 
-        try {
-          const res = await fetch(
-            "https://amhxnojzpplpfqvxdvug.supabase.co/functions/v1/newsletter-signup",
-            {
-              method: "POST",
-              headers: {
-                "Content-Type": "application/json",
-              },
-              body: JSON.stringify({ email }),
-            },
-          );
-
-          const text = await res.text();
-          console.log("STATUS:", res.status);
-          console.log("RESPONSE:", text);
-
-          let data = {};
           try {
-            data = JSON.parse(text);
-          } catch {}
+            const res = await fetch(
+              "https://amhxnojzpplpfqvxdvug.supabase.co/functions/v1/newsletter-signup",
+              {
+                method: "POST",
+                headers: {
+                  "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ email }),
+              },
+            );
 
-          if (!res.ok) {
-            message.textContent = data.error || text || "Noe gikk galt.";
-            return;
+            const text = await res.text();
+            console.log("STATUS:", res.status);
+            console.log("RESPONSE:", text);
+
+            let data = {};
+            try {
+              data = JSON.parse(text);
+            } catch {}
+
+            if (!res.ok) {
+              message.textContent = data.error || text || "Noe gikk galt.";
+              return;
+            }
+
+            if (data.alreadyExists) {
+              message.textContent = "Du er allerede påmeldt nyhetsbrevet.";
+              return;
+            }
+
+            message.textContent = "Takk! Du er nå påmeldt nyhetsbrevet.";
+            form.reset();
+          } catch (err) {
+            console.error("FETCH ERROR:", err);
+            message.textContent = "Fikk ikke kontakt med serveren.";
           }
-
-          if (data.alreadyExists) {
-            message.textContent = "Du er allerede påmeldt nyhetsbrevet.";
-            return;
-          }
-
-          message.textContent = "Takk! Du er nå påmeldt nyhetsbrevet.";
-          form.reset();
-        } catch (err) {
-          console.error("FETCH ERROR:", err);
-          message.textContent = "Fikk ikke kontakt med serveren.";
-        }
-      });
+        });
+      }
     </script>
 
     <script>
+      function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+        }
+      }
+
+      updateCartCount();
+
       const menuToggle = document.getElementById("menu-toggle");
       const navMenu = document.getElementById("nav-menu");
 
-      menuToggle.addEventListener("click", () => {
-        navMenu.classList.toggle("active");
-      });
+      if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", () => {
+          navMenu.classList.toggle("active");
+        });
+      }
     </script>
   </body>
 </html>

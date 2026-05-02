@@ -1,44 +1,155 @@
+/* =========================
+   GLOBALT
+========================= */
+
 body {
   margin: 0;
-  font-family: Arial, sans-serif;
+  font-family: "Montserrat", sans-serif;
   background-color: #f7f2eb;
   color: #2f2a26;
 }
 
+a {
+  color: inherit;
+}
+
+
+/* =========================
+   GAMMEL TOP-LINE
+   Skjult fordi ny header brukes
+========================= */
+
 .top-line {
-  position: sticky;
-  top: 0;
-  z-index: 1001;
-  background-color: #ffffff;
-  color: #2f2a26;
-  text-align: center;
-  padding: 12px;
-  font-family: "Montserrat", sans-serif;
-  font-weight: 600;
-  letter-spacing: 4px;
-  font-size: 18px;
+  display: none;
 }
 
 .top-line a {
   font-family: "Cormorant Garamond", serif;
   font-weight: 300;
-  letter-spacing: 4px;
+  letter-spacing: 3px;
+  font-size: 28px;
+  color: #2f2a26;
+  text-decoration: none;
+  text-transform: uppercase;
 }
 
 .top-line a:hover {
   opacity: 0.7;
 }
 
+
+/* =========================
+   HEADER
+========================= */
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  height: 60px;
+  background-color: #ffffff;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0 24px;
+}
+
+.header-logo {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: 28px;
+  letter-spacing: 4px;
+  text-transform: uppercase;
+  line-height: 1;
+
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.site-header .menu-toggle {
+  position: absolute;
+  left: 24px;
+
+  display: none;
+
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #2f2a26;
+  cursor: pointer;
+}
+
+.site-header .cart-link {
+  position: absolute;
+  right: 24px;
+
+  display: flex;
+  align-items: center;
+  gap: 6px;
+
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.site-header a,
+.site-header a:visited,
+.site-header a:hover,
+.site-header a:active {
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.cart-link {
+  font-size: 20px;
+  text-decoration: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.cart-link i {
+  color: #2f2a26;
+}
+
+.cart-link:hover i {
+  opacity: 0.7;
+}
+
+#cart-count {
+  font-size: 14px;
+  background-color: #2f2a26;
+  color: white;
+  border-radius: 50%;
+
+  min-width: 20px;
+  height: 20px;
+  padding: 2px;
+
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+
+/* =========================
+   NAVIGASJON
+========================= */
+
 .navbar {
   position: sticky;
-  top: 44px;
-  z-index: 1000;
+  top: 60px;
+  z-index: 1500;
+
   background-color: #eee6dc;
+
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
-  padding: 18px 30px;
   flex-wrap: wrap;
+
+  padding: 18px 30px;
 }
 
 .nav-left {
@@ -50,7 +161,7 @@ body {
 }
 
 .nav-right {
-  display: flex;
+  display: none;
   align-items: center;
   min-width: 80px;
   justify-content: flex-end;
@@ -69,26 +180,10 @@ body {
   text-decoration: underline;
 }
 
-.cart-link {
-  font-size: 20px;
-  text-decoration: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
 
-#cart-count {
-  font-size: 14px;
-  background-color: #2f2a26;
-  color: white;
-  border-radius: 50%;
-  min-width: 20px;
-  height: 20px;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: 2px;
-}
+/* =========================
+   HERO
+========================= */
 
 .hero {
   height: 500px;
@@ -99,11 +194,16 @@ body {
   background-attachment: fixed;
 }
 
-/* GENERELT FOR PRODUKTSEKSJONER */
+
+/* =========================
+   PRODUKTSEKSJONER
+========================= */
+
 .products {
   padding: 50px 30px;
   max-width: 1400px;
   margin: auto;
+
   font-family: "Montserrat", sans-serif;
   font-weight: 300;
 }
@@ -129,21 +229,23 @@ body {
   margin: 60px 0 25px;
 }
 
-/* GRID FOR FORSIDE */
+
+/* =========================
+   PRODUKT-GRID
+========================= */
+
 .product-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: 25px;
 }
 
-/* GRID FOR NEDERSTE PRODUKTER PÅ FORSIDEN */
 .product-grid-5 {
   display: grid;
   grid-template-columns: repeat(5, 1fr);
   gap: 20px;
 }
 
-/* GRID FOR ALLE-SMYKKER.HTML */
 .all-products-grid {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
@@ -151,14 +253,20 @@ body {
   margin-top: 40px;
 }
 
-/* PRODUKTKORT GENERELT */
+
+/* =========================
+   PRODUKTKORT
+========================= */
+
 .product-card {
   background-color: rgba(234, 223, 206, 0.7);
   border-radius: 12px;
   overflow: hidden;
+
   text-decoration: none;
   color: #2f2a26;
   text-align: center;
+
   transition:
     transform 0.3s,
     box-shadow 0.3s;
@@ -177,7 +285,11 @@ body {
   margin: 0 16px 20px;
 }
 
-/* HOVER-BILDER PÅ FORSIDEN */
+
+/* =========================
+   HOVER-BILDER PÅ FORSIDE
+========================= */
+
 .image-wrapper {
   position: relative;
 }
@@ -193,6 +305,7 @@ body {
   position: absolute;
   top: 0;
   left: 0;
+
   opacity: 0;
   transition: opacity 0.3s ease;
 }
@@ -205,7 +318,11 @@ body {
   opacity: 0;
 }
 
-/* ENKLE PRODUKTKORT */
+
+/* =========================
+   ENKLE PRODUKTKORT
+========================= */
+
 .product-card.simple {
   background: none;
   border-radius: 0;
@@ -230,7 +347,11 @@ body {
   font-size: 14px;
 }
 
-/* STORE BILDER */
+
+/* =========================
+   STORE BILDER
+========================= */
+
 .large-images {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -253,12 +374,16 @@ body {
   background-color: rgba(255, 255, 255, 0.9);
   color: #2f2a26;
   text-decoration: none;
+
   padding: 8px 16px;
+
   font-family: "Montserrat", sans-serif;
   font-size: 13px;
   letter-spacing: 0.5px;
+
   border-radius: 4px;
   transition: background-color 0.3s ease;
+
   display: inline-block;
   text-align: center;
   line-height: 1.2;
@@ -274,13 +399,18 @@ body {
   top: 30%;
   left: 50%;
   transform: translate(-50%, -50%);
+
   padding: 12px 20px;
   font-size: 14px;
   letter-spacing: 1px;
   z-index: 2;
 }
 
-/* INSPIRASJON */
+
+/* =========================
+   INSPIRASJON
+========================= */
+
 .inspirasjon {
   padding: 40px 0;
   background-color: #f7f2eb;
@@ -325,8 +455,10 @@ body {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
+
   background: transparent;
   border: none;
+
   font-size: 42px;
   cursor: pointer;
   color: #2f2a26;
@@ -341,11 +473,16 @@ body {
   right: 0;
 }
 
-/* PRODUKTSIDE */
+
+/* =========================
+   PRODUKTSIDE
+========================= */
+
 .product-page {
   max-width: 1600px;
   margin: 0 auto;
   padding: 60px 30px;
+
   font-family: "Montserrat", sans-serif;
 }
 
@@ -356,7 +493,6 @@ body {
   justify-content: center;
 }
 
-/* PRODUKTSIDE MED ETT BILDE */
 .product-page-image {
   flex: 1;
 }
@@ -369,12 +505,12 @@ body {
   display: block;
 }
 
-/* PRODUKTSIDE MED GALLERI */
 .product-gallery {
   display: flex;
   gap: 20px;
   align-items: flex-start;
-  flex: 0 0 750px; /* 👈 FAST BREDDE */
+
+  flex: 0 0 750px;
 }
 
 .thumbnail-column {
@@ -387,6 +523,7 @@ body {
   width: 115px;
   height: 115px;
   object-fit: cover;
+
   cursor: pointer;
   border: 1px solid #bdb6ad;
   transition: 0.2s ease;
@@ -457,10 +594,13 @@ body {
   background-color: #2f2a26;
   color: white;
   border: none;
+
   padding: 16px 28px;
+
   font-family: "Montserrat", sans-serif;
   font-size: 14px;
   letter-spacing: 1px;
+
   cursor: pointer;
   transition: opacity 0.3s ease;
 }
@@ -469,11 +609,16 @@ body {
   opacity: 0.85;
 }
 
-/* HANDLEKURV */
+
+/* =========================
+   HANDLEKURV
+========================= */
+
 .cart-page {
   max-width: 1100px;
   margin: 0 auto;
   padding: 60px 30px;
+
   font-family: "Montserrat", sans-serif;
 }
 
@@ -488,8 +633,10 @@ body {
   display: flex;
   gap: 25px;
   align-items: center;
+
   margin-bottom: 30px;
   padding-bottom: 20px;
+
   border-bottom: 1px solid #ddd0c2;
 }
 
@@ -513,7 +660,9 @@ body {
   background-color: #2f2a26;
   color: white;
   border: none;
+
   padding: 10px 18px;
+
   cursor: pointer;
   font-family: "Montserrat", sans-serif;
 }
@@ -523,7 +672,181 @@ body {
   font-weight: 400;
 }
 
-/* FOOTER */
+.empty-cart {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+
+  margin-top: 0;
+  padding: 0;
+
+  text-align: center;
+}
+
+.empty-cart h2 {
+  font-size: 42px;
+  margin-bottom: 10px;
+  font-weight: 400;
+}
+
+.empty-cart p {
+  max-width: 500px;
+  line-height: 1.8;
+  margin-bottom: 25px;
+  color: #7a6f66;
+}
+
+.empty-cart-icon {
+  width: 200px;
+  margin-bottom: 50px;
+  opacity: 0.8;
+
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.cart-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 20px;
+}
+
+
+/* =========================
+   VIDEO
+========================= */
+
+.video-section {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  padding: 40px 0;
+}
+
+.video-section video {
+  width: 80%;
+  max-width: 900px;
+  height: auto;
+  display: block;
+}
+
+
+/* =========================
+   NYHETSBREV
+========================= */
+
+#newsletter-message {
+  color: black;
+  margin-top: 12px;
+  font-size: 14px;
+}
+
+
+/* =========================
+   FIRKANT-GRID
+========================= */
+
+.square-grid {
+  width: 100%;
+  aspect-ratio: 1 / 1;
+
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-template-rows: repeat(2, 1fr);
+}
+
+.grid-item {
+  overflow: hidden;
+}
+
+.grid-item img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+
+/* =========================
+   ABOUT / OM OSS
+========================= */
+
+.about-image img {
+  width: 100%;
+  max-width: 400px;
+  height: auto;
+  object-fit: contain;
+
+  display: block;
+  margin: 0 auto;
+}
+
+.about-text {
+  text-align: center;
+  margin: 0 auto;
+  max-width: 600px;
+}
+
+.about-text h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  letter-spacing: 3px;
+  font-size: 44px;
+  color: #2f2a26;
+}
+
+.about-button {
+  display: inline-block;
+  margin-top: 25px;
+}
+
+.about-hero {
+  margin-bottom: 80px;
+}
+
+
+/* =========================
+   KATEGORI-BANNER
+========================= */
+
+.category-banner {
+  position: relative;
+  width: 100%;
+  height: 350px;
+  overflow: hidden;
+}
+
+.category-banner img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 42% 68%;
+}
+
+.category-banner h1 {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  color: white;
+
+  font-family: "Cormorant Garamond", serif;
+  font-size: 60px;
+  font-weight: 300;
+  letter-spacing: 5px;
+}
+
+.halskjeder-page .category-banner img {
+  object-position: center center;
+}
+
+
+/* =========================
+   FOOTER
+========================= */
+
 .footer {
   background-color: #eee6dc;
   text-align: center;
@@ -531,7 +854,126 @@ body {
   margin-top: 40px;
 }
 
-/* RESPONSIVE */
+.footer-luxury {
+  background-color: #e7e2da;
+  padding: 70px 55px 25px;
+  color: #222;
+  font-family: "Montserrat", sans-serif;
+}
+
+.footer-top {
+  display: grid;
+  grid-template-columns: 1.2fr 1.8fr;
+  gap: 80px;
+  margin-bottom: 70px;
+}
+
+.footer-newsletter h2,
+.footer-links h3 {
+  font-family: serif;
+  font-weight: 400;
+  letter-spacing: 1px;
+}
+
+.footer-newsletter h2 {
+  font-size: 28px;
+  margin-bottom: 18px;
+}
+
+.footer-newsletter p {
+  font-size: 14px;
+  margin-bottom: 28px;
+}
+
+.footer-form {
+  display: flex;
+  align-items: center;
+
+  border-bottom: 1px solid #999;
+  max-width: 520px;
+}
+
+.footer-form input {
+  flex: 1;
+  border: none;
+  background: transparent;
+
+  padding: 14px 0;
+
+  font-size: 14px;
+  outline: none;
+}
+
+.footer-form button {
+  border: none;
+  background: transparent;
+
+  font-size: 28px;
+  cursor: pointer;
+}
+
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 55px;
+}
+
+.footer-links h3 {
+  font-size: 28px;
+  margin-bottom: 25px;
+}
+
+.footer-links a {
+  display: block;
+
+  color: #222;
+  text-decoration: none;
+  font-size: 14px;
+  text-transform: uppercase;
+
+  margin-bottom: 14px;
+}
+
+.footer-brand {
+  margin-top: 40px;
+  border-top: 1px solid #d8d1c8;
+  padding-top: 40px;
+}
+
+.footer-brand h1 {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  font-size: clamp(50px, 12vw, 180px);
+  letter-spacing: 2px;
+  line-height: 0.85;
+
+  text-align: left;
+  margin: 0;
+
+  color: #2f2a26;
+}
+
+.footer-bottom {
+  border-top: 1px solid #d2ccc3;
+  padding-top: 25px;
+
+  display: flex;
+  justify-content: space-between;
+
+  font-size: 13px;
+}
+
+.footer-socials a {
+  color: #222;
+  text-decoration: none;
+  margin-left: 20px;
+}
+
+
+/* =========================
+   RESPONSIVE: TABLET
+========================= */
+
 @media (max-width: 1100px) {
   .product-grid-5 {
     grid-template-columns: repeat(3, 1fr);
@@ -564,6 +1006,11 @@ body {
   }
 }
 
+
+/* =========================
+   RESPONSIVE: LITEN TABLET
+========================= */
+
 @media (max-width: 900px) {
   .product-grid {
     grid-template-columns: repeat(2, 1fr);
@@ -578,7 +1025,6 @@ body {
   }
 
   .hero {
-    height: 380px;
     background-attachment: scroll;
   }
 
@@ -612,6 +1058,11 @@ body {
   }
 }
 
+
+/* =========================
+   RESPONSIVE: MOBIL
+========================= */
+
 @media (max-width: 600px) {
   .product-grid,
   .product-grid-5,
@@ -619,13 +1070,10 @@ body {
     grid-template-columns: 1fr;
   }
 
-  /* 👇 OVERRIDER KUN FOR FORSIDEN */
   .main-categories {
     grid-template-columns: repeat(2, 1fr);
   }
-}
 
-@media (max-width: 600px) {
   .hero {
     height: 260px;
     background-attachment: scroll;
@@ -633,7 +1081,6 @@ body {
 
   .navbar {
     gap: 20px;
-    padding: 14px;
   }
 
   .large-images {
@@ -673,178 +1120,122 @@ body {
     height: auto;
   }
 }
-.video-section {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 40px 0;
+
+
+/* =========================
+   RESPONSIVE: HEADER / NAV MOBIL
+========================= */
+
+@media (max-width: 768px) {
+  .site-header {
+    height: 60px;
+    padding: 0 16px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    position: sticky;
+  }
+
+  .site-header .header-logo {
+    font-size: 28px;
+    line-height: 1;
+  }
+
+  .site-header .menu-toggle {
+    display: block;
+    visibility: visible;
+
+    position: absolute;
+    left: 16px;
+    top: 50%;
+    transform: translateY(-50%);
+
+    width: 40px;
+    height: 40px;
+    padding: 0;
+    line-height: 1;
+  }
+
+  .site-header .cart-link {
+    right: 16px;
+
+    height: 40px;
+    line-height: 1;
+  }
+
+  .navbar {
+    position: sticky;
+    top: 60px;
+    left: 0;
+    right: 0;
+
+    height: 60px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    background-color: #eee6dc;
+  }
+
+  .nav-left {
+    display: none;
+
+    position: absolute;
+    top: 60px;
+    left: 0;
+
+    width: 100%;
+
+    flex-direction: column;
+    gap: 0;
+
+    text-align: center;
+    background-color: #eee6dc;
+    padding: 18px 0;
+  }
+
+  .nav-left.active {
+    display: flex;
+  }
+
+  .nav-left a {
+    padding: 14px 0;
+    font-size: 15px;
+  }
+
+  .nav-right {
+    display: none;
+  }
+
+  /*
+    BEHOLDT FORDI DEN KAN PÅVIRKE SIDEN DIN NÅ:
+    Denne regelen er ikke ideell, men den fantes i CSS-en din
+    og kan være grunnen til at handlekurven ligger riktig på mobil.
+    Vi bør teste den separat før den fjernes.
+  */
+  .cart-link {
+    position: fixed !important;
+    top: 30px !important;
+    right: 16px !important;
+    left: auto !important;
+    transform: translateY(-50%) !important;
+    z-index: 9999 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
 }
 
-.video-section video {
-  width: 80%;
-  max-width: 900px;
-  height: auto;
-  display: block;
-}
 
-.empty-cart {
-  display: flex;
-  flex-direction: column;
+/* =========================
+   RESPONSIVE: FOOTER MOBIL
+========================= */
 
-  align-items: center;
-  margin-top: 00px; /* horisontal midtstilling */
-  text-align: center;
-  /* gjør at den havner midt på siden */
-  padding: 00px 00px;
-}
-
-.empty-cart h2 {
-  font-size: 42px;
-  margin-bottom: 10px;
-  font-weight: 400;
-}
-
-.empty-cart p {
-  max-width: 500px;
-  line-height: 1.8;
-  margin-bottom: 25px;
-  color: #7a6f66;
-}
-
-.empty-cart-icon {
-  width: 200px;
-  margin-bottom: 50px;
-  opacity: 0.8;
-  display: block;
-  margin-left: auto;
-  margin-right: auto;
-}
-.cart-buttons {
-  display: flex;
-  gap: 12px;
-  margin-top: 20px;
-}
-
-#newsletter-message {
-  color: black;
-  margin-top: 12px;
-  font-size: 14px;
-}
-.square-grid {
-  width: 100%;
-  aspect-ratio: 1 / 1; /* hele blokken blir en firkant */
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  grid-template-rows: repeat(2, 1fr);
-}
-
-.grid-item {
-  overflow: hidden;
-}
-
-.grid-item img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-.footer-luxury {
-  background-color: #e7e2da;
-  padding: 70px 55px 25px;
-  color: #222;
-  font-family: "Montserrat", sans-serif;
-}
-
-.footer-top {
-  display: grid;
-  grid-template-columns: 1.2fr 1.8fr;
-  gap: 80px;
-  margin-bottom: 70px;
-}
-
-.footer-newsletter h2,
-.footer-links h3 {
-  font-family: serif;
-  font-weight: 400;
-  letter-spacing: 1px;
-}
-
-.footer-newsletter h2 {
-  font-size: 28px;
-  margin-bottom: 18px;
-}
-
-.footer-newsletter p {
-  font-size: 14px;
-  margin-bottom: 28px;
-}
-
-.footer-form {
-  display: flex;
-  align-items: center;
-  border-bottom: 1px solid #999;
-  max-width: 520px;
-}
-
-.footer-form input {
-  flex: 1;
-  border: none;
-  background: transparent;
-  padding: 14px 0;
-  font-size: 14px;
-  outline: none;
-}
-
-.footer-form button {
-  border: none;
-  background: transparent;
-  font-size: 28px;
-  cursor: pointer;
-}
-
-.footer-links {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 55px;
-}
-
-.footer-links h3 {
-  font-size: 28px;
-  margin-bottom: 25px;
-}
-
-.footer-links a {
-  display: block;
-  color: #222;
-  text-decoration: none;
-  font-size: 14px;
-  margin-bottom: 14px;
-  text-transform: uppercase;
-}
-
-.footer-brand h1 {
-  font-family: serif;
-  font-size: clamp(80px, 18vw, 250px);
-  font-weight: 400;
-  letter-spacing: -8px;
-  margin: 0;
-  line-height: 0.85;
-}
-
-.footer-bottom {
-  border-top: 1px solid #d2ccc3;
-  padding-top: 25px;
-  display: flex;
-  justify-content: space-between;
-  font-size: 13px;
-}
-
-.footer-socials a {
-  color: #222;
-  text-decoration: none;
-  margin-left: 20px;
-}
-
-/* Mobil */
 @media (max-width: 768px) {
   .footer-luxury {
     padding: 45px 25px 25px;
@@ -865,8 +1256,8 @@ body {
   }
 
   .footer-brand h1 {
-    font-size: 64px;
-    letter-spacing: -2px;
+    font-size: 48px;
+    letter-spacing: -1px;
   }
 
   .footer-bottom {
@@ -877,676 +1268,5 @@ body {
   .footer-socials a {
     margin-left: 0;
     margin-right: 15px;
-  }
-}
-body {
-  font-family: "Montserrat", sans-serif;
-}
-
-/* LOGO ØVERST */
-.top-line a {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 300;
-  letter-spacing: 3px;
-  font-size: 28px;
-  color: #2f2a26;
-  text-decoration: none;
-  text-transform: uppercase;
-}
-
-/* LOGO NEDERST */
-.footer-brand {
-  margin-top: 40px;
-}
-
-.footer-brand h1 {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 300;
-
-  font-size: 100px;
-  letter-spacing: 2px;
-
-  text-align: left;
-  margin: 0;
-
-  color: #2f2a26;
-}
-.footer-brand {
-  border-top: 1px solid #d8d1c8;
-  padding-top: 40px;
-}
-
-.about-image img {
-  width: 100%;
-  max-width: 400px;
-  height: auto;
-  object-fit: contain;
-  display: block;
-  margin: 0 auto;
-}
-
-.about-text h1 {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 300;
-  letter-spacing: 3px;
-  font-size: 44px;
-  color: #2f2a26;
-}
-.about-text {
-  text-align: center;
-  margin: 0 auto;
-}
-
-.about-button {
-  display: inline-block;
-  margin-top: 25px;
-}
-
-.about-text {
-  text-align: center;
-  margin: 0 auto;
-  max-width: 600px;
-}
-
-.about-hero {
-  margin-bottom: 80px;
-}
-
-/* MOBILMENY */
-.menu-toggle {
-  display: none;
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #2f2a26;
-}
-
-.category-banner {
-  position: relative;
-  width: 100%;
-  height: 350px;
-  overflow: hidden;
-}
-
-.category-banner img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  object-position: 42% 68%;
-}
-
-.category-banner h1 {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  color: white;
-  font-family: "Cormorant Garamond", serif;
-  font-size: 60px;
-  font-weight: 300;
-  letter-spacing: 5px;
-}
-
-.footer-brand h1 {
-  font-size: clamp(50px, 12vw, 180px);
-}
-
-@media (max-width: 768px) {
-  .footer-brand h1 {
-    font-size: 48px;
-    letter-spacing: -1px;
-  }
-}
-
-/* ===== HEADER (RYDDIG OG STABIL) ===== */
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1002;
-  background-color: #ffffff;
-  height: 60px;
-
-  display: grid;
-  grid-template-columns: 1fr auto 1fr;
-  align-items: center;
-
-  padding: 0 24px;
-}
-
-/* VENSTRE: meny */
-.site-header .menu-toggle {
-  grid-column: 1;
-  justify-self: start;
-
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #2f2a26;
-}
-
-/* MIDTEN: logo */
-.site-header .header-logo {
-  grid-column: 2;
-  justify-self: center;
-
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 300;
-  letter-spacing: 4px;
-  font-size: 28px;
-  text-transform: uppercase;
-
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-/* HØYRE: handlekurv */
-.site-header .cart-link {
-  grid-column: 3;
-  justify-self: end;
-
-  display: flex;
-  align-items: center;
-  gap: 6px;
-
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-/* FIKSER LILLA/BLÅ LENKER */
-.site-header .header-logo:visited,
-.site-header .header-logo:hover,
-.site-header .header-logo:active,
-.site-header .cart-link:visited,
-.site-header .cart-link:hover,
-.site-header .cart-link:active {
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-/* ikon */
-.cart-link i {
-  color: #2f2a26;
-}
-
-.cart-link:hover i {
-  opacity: 0.7;
-}
-
-/* Desktop: skjul hamburger */
-@media (min-width: 769px) {
-  .menu-toggle {
-    visibility: hidden;
-  }
-}
-
-.site-header .header-logo:visited,
-.site-header .header-logo:hover,
-.site-header .header-logo:active {
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-.site-header .cart-link {
-  grid-column: 3;
-  justify-self: end;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-.site-header .cart-link:visited,
-.site-header .cart-link:hover,
-.site-header .cart-link:active {
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-.site-header .cart-link i {
-  color: #2f2a26;
-}
-
-.navbar {
-  top: 60px;
-}
-
-/* Desktop: skjul hamburger ikon */
-@media (min-width: 769px) {
-  .site-header .menu-toggle {
-    visibility: hidden;
-  }
-}
-
-/* Mobil */
-@media (max-width: 768px) {
-  .site-header {
-    padding: 0 16px;
-  }
-
-  .site-header .menu-toggle {
-    visibility: visible;
-  }
-
-  .navbar {
-    top: 60px;
-  }
-}
-/* HEADER FINAL FIX */
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 1002;
-  background-color: #ffffff;
-  height: 60px;
-  padding: 0 24px;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-/* logo midt */
-.site-header .header-logo {
-  font-family: "Cormorant Garamond", serif;
-  font-weight: 300;
-  letter-spacing: 4px;
-  font-size: 28px;
-  text-transform: uppercase;
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-/* handlekurv høyre */
-.site-header .cart-link {
-  position: absolute;
-  right: 24px;
-
-  display: flex;
-  align-items: center;
-  gap: 6px;
-
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-/* meny venstre */
-.site-header .menu-toggle {
-  position: absolute;
-  left: 24px;
-
-  background: none;
-  border: none;
-  font-size: 28px;
-  cursor: pointer;
-  color: #2f2a26;
-}
-
-/* farger på linker */
-.site-header .header-logo:visited,
-.site-header .header-logo:hover,
-.site-header .header-logo:active,
-.site-header .cart-link:visited,
-.site-header .cart-link:hover,
-.site-header .cart-link:active {
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-.site-header .cart-link i {
-  color: #2f2a26;
-}
-
-/* desktop: skjul hamburger */
-@media (min-width: 769px) {
-  .site-header .menu-toggle {
-    visibility: hidden;
-  }
-}
-/* MOBIL HEADER FIX */
-@media (max-width: 768px) {
-  .site-header {
-    height: 60px;
-    padding: 0 16px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: sticky;
-  }
-
-  .site-header .header-logo {
-    line-height: 60px;
-    font-size: 28px;
-  }
-
-  .site-header .menu-toggle {
-    visibility: visible;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    height: 40px;
-    width: 40px;
-    padding: 0;
-    line-height: 1;
-  }
-
-  .site-header .cart-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-
-    height: 40px;
-    line-height: 1;
-  }
-}
-.halskjeder-page .category-banner img {
-  object-position: center center;
-}
-@media (max-width: 768px) {
-  .site-header {
-    height: 60px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    position: sticky;
-    padding: 0 16px;
-  }
-
-  .site-header .header-logo {
-    font-size: 28px;
-    line-height: 1;
-  }
-
-  .site-header .menu-toggle {
-    position: absolute;
-    left: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-
-  .site-header .cart-link {
-    position: absolute;
-    right: 16px;
-    top: 50%;
-    transform: translateY(-50%);
-  }
-}
-.hero {
-  height: 500px;
-  background-image: url("Images/Smykker-banner.jpg");
-  background-size: cover;
-  background-position: center;
-  background-repeat: no-repeat;
-}
-
-@media (max-width: 600px) {
-  .hero {
-    height: 260px;
-    background-attachment: scroll;
-  }
-}
-/* MOBIL-FIKS FOR HANDLEKURV */
-
-/* TVING HANDLEKURV TIL HØYRE PÅ MOBIL */
-@media (max-width: 768px) {
-  .cart-link {
-    position: fixed !important;
-    top: 30px !important;
-    right: 16px !important;
-    left: auto !important;
-    transform: translateY(-50%) !important;
-    z-index: 9999 !important;
-
-    display: flex !important;
-    align-items: center !important;
-    justify-content: center !important;
-  }
-}
-/* =========================
-   MOBIL HEADER / MENY FIX
-========================= */
-
-@media (max-width: 768px) {
-  /* Øverste logo-linje */
-  .top-line {
-    position: sticky;
-    top: 0;
-    z-index: 1002;
-    height: 60px;
-    padding: 0;
-    background-color: #ffffff;
-
-    display: flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  .top-line a {
-    font-size: 28px;
-    letter-spacing: 4px;
-    line-height: 1;
-  }
-
-  /* Navbar ligger oppå top-line kun for meny + handlekurv */
-  .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
-
-    height: 60px;
-    padding: 0 16px;
-    background: transparent;
-
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    z-index: 1003;
-  }
-
-  /* Hamburger venstre */
-  .menu-toggle {
-    display: flex;
-    visibility: visible;
-
-    align-items: center;
-    justify-content: center;
-
-    width: 40px;
-    height: 40px;
-    padding: 0;
-
-    background: none;
-    border: none;
-    color: #2f2a26;
-    font-size: 28px;
-    cursor: pointer;
-  }
-
-  /* Menyen skjult som standard */
-  .nav-left {
-    display: none;
-
-    position: absolute;
-    top: 60px;
-    left: 0;
-    width: 100%;
-
-    background-color: #eee6dc;
-    flex-direction: column;
-    text-align: center;
-    padding: 18px 0;
-    gap: 0;
-  }
-
-  /* Når JS legger til active */
-  .nav-left.active {
-    display: flex;
-  }
-
-  .nav-left a {
-    padding: 14px 0;
-    font-size: 15px;
-  }
-
-  /* Handlekurv høyre */
-  .nav-right {
-    display: flex;
-    align-items: center;
-    justify-content: flex-end;
-    min-width: 40px;
-  }
-
-  .cart-link {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 6px;
-
-    color: #2f2a26;
-    text-decoration: none;
-  }
-
-  .cart-link:visited,
-  .cart-link:hover,
-  .cart-link:active {
-    color: #2f2a26;
-    text-decoration: none;
-  }
-
-  .cart-link i {
-    color: #2f2a26;
-  }
-}
-/* HEADER - NY REN VERSJON */
-
-.top-line {
-  display: none;
-}
-
-.site-header {
-  position: sticky;
-  top: 0;
-  z-index: 2000;
-  height: 60px;
-  background: #ffffff;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 0 24px;
-}
-
-.header-logo {
-  font-family: "Cormorant Garamond", serif;
-  font-size: 28px;
-  letter-spacing: 4px;
-  color: #2f2a26;
-  text-decoration: none;
-  text-transform: uppercase;
-  line-height: 1;
-}
-
-.site-header .menu-toggle {
-  position: absolute;
-  left: 24px;
-  display: none;
-  background: none;
-  border: none;
-  font-size: 28px;
-  color: #2f2a26;
-  cursor: pointer;
-}
-
-.site-header .cart-link {
-  position: absolute;
-  right: 24px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-.site-header a,
-.site-header a:visited,
-.site-header a:hover,
-.site-header a:active {
-  color: #2f2a26;
-  text-decoration: none;
-}
-
-.navbar {
-  position: sticky;
-  top: 60px;
-  z-index: 1500;
-  background-color: #eee6dc;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  padding: 18px 30px;
-}
-
-.nav-left {
-  display: flex;
-  justify-content: center;
-  gap: 40px;
-  flex-wrap: wrap;
-}
-
-.nav-right {
-  display: none;
-}
-
-@media (max-width: 768px) {
-  .site-header {
-    padding: 0 16px;
-  }
-
-  .site-header .menu-toggle {
-    display: block;
-    left: 16px;
-  }
-
-  .site-header .cart-link {
-    right: 16px;
-  }
-
-  .navbar {
-    position: sticky;
-    top: 60px;
-    padding: 0;
-  }
-
-  .nav-left {
-    display: none;
-    width: 100%;
-    flex-direction: column;
-    gap: 0;
-    text-align: center;
-    background-color: #eee6dc;
-    padding: 18px 0;
-  }
-
-  .nav-left.active {
-    display: flex;
-  }
-
-  .nav-left a {
-    padding: 14px 0;
   }
 }
