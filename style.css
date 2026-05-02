@@ -1300,34 +1300,7 @@ body {
   }
 }
 /* MOBIL-FIKS FOR HANDLEKURV */
-@media (max-width: 768px) {
-  .navbar {
-    position: sticky !important;
-    top: 60px !important;
-    left: auto !important;
-    width: 100% !important;
-  }
 
-  .navbar .nav-right {
-    display: none !important;
-  }
-
-  .site-header .cart-link {
-    position: absolute !important;
-    right: 16px !important;
-    left: auto !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-  }
-
-  .site-header .menu-toggle {
-    position: absolute !important;
-    left: 16px !important;
-    right: auto !important;
-    top: 50% !important;
-    transform: translateY(-50%) !important;
-  }
-}
 /* TVING HANDLEKURV TIL HØYRE PÅ MOBIL */
 @media (max-width: 768px) {
   .cart-link {
@@ -1341,5 +1314,122 @@ body {
     display: flex !important;
     align-items: center !important;
     justify-content: center !important;
+  }
+}
+/* =========================
+   MOBIL HEADER / MENY FIX
+========================= */
+
+@media (max-width: 768px) {
+  /* Øverste logo-linje */
+  .top-line {
+    position: sticky;
+    top: 0;
+    z-index: 1002;
+    height: 60px;
+    padding: 0;
+    background-color: #ffffff;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .top-line a {
+    font-size: 28px;
+    letter-spacing: 4px;
+    line-height: 1;
+  }
+
+  /* Navbar ligger oppå top-line kun for meny + handlekurv */
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    height: 60px;
+    padding: 0 16px;
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    z-index: 1003;
+  }
+
+  /* Hamburger venstre */
+  .menu-toggle {
+    display: flex;
+    visibility: visible;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    background: none;
+    border: none;
+    color: #2f2a26;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  /* Menyen skjult som standard */
+  .nav-left {
+    display: none;
+
+    position: absolute;
+    top: 60px;
+    left: 0;
+    width: 100%;
+
+    background-color: #eee6dc;
+    flex-direction: column;
+    text-align: center;
+    padding: 18px 0;
+    gap: 0;
+  }
+
+  /* Når JS legger til active */
+  .nav-left.active {
+    display: flex;
+  }
+
+  .nav-left a {
+    padding: 14px 0;
+    font-size: 15px;
+  }
+
+  /* Handlekurv høyre */
+  .nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 40px;
+  }
+
+  .cart-link {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+
+    color: #2f2a26;
+    text-decoration: none;
+  }
+
+  .cart-link:visited,
+  .cart-link:hover,
+  .cart-link:active {
+    color: #2f2a26;
+    text-decoration: none;
+  }
+
+  .cart-link i {
+    color: #2f2a26;
   }
 }
