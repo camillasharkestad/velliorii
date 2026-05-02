@@ -1433,3 +1433,120 @@ body {
     color: #2f2a26;
   }
 }
+/* HEADER - NY REN VERSJON */
+
+.top-line {
+  display: none;
+}
+
+.site-header {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+  height: 60px;
+  background: #ffffff;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 24px;
+}
+
+.header-logo {
+  font-family: "Cormorant Garamond", serif;
+  font-size: 28px;
+  letter-spacing: 4px;
+  color: #2f2a26;
+  text-decoration: none;
+  text-transform: uppercase;
+  line-height: 1;
+}
+
+.site-header .menu-toggle {
+  position: absolute;
+  left: 24px;
+  display: none;
+  background: none;
+  border: none;
+  font-size: 28px;
+  color: #2f2a26;
+  cursor: pointer;
+}
+
+.site-header .cart-link {
+  position: absolute;
+  right: 24px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.site-header a,
+.site-header a:visited,
+.site-header a:hover,
+.site-header a:active {
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.navbar {
+  position: sticky;
+  top: 60px;
+  z-index: 1500;
+  background-color: #eee6dc;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 18px 30px;
+}
+
+.nav-left {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex-wrap: wrap;
+}
+
+.nav-right {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  .site-header {
+    padding: 0 16px;
+  }
+
+  .site-header .menu-toggle {
+    display: block;
+    left: 16px;
+  }
+
+  .site-header .cart-link {
+    right: 16px;
+  }
+
+  .navbar {
+    position: sticky;
+    top: 60px;
+    padding: 0;
+  }
+
+  .nav-left {
+    display: none;
+    width: 100%;
+    flex-direction: column;
+    gap: 0;
+    text-align: center;
+    background-color: #eee6dc;
+    padding: 18px 0;
+  }
+
+  .nav-left.active {
+    display: flex;
+  }
+
+  .nav-left a {
+    padding: 14px 0;
+  }
+}
