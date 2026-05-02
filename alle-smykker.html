@@ -1,34 +1,36 @@
 <!doctype html>
 <html lang="no">
   <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Alle smykker</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Alle smykker</title>
 
-  <!-- FONTS -->
-  <link rel="preconnect" href="https://fonts.googleapis.com" />
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link
-    href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500&display=swap"
-    rel="stylesheet"
-  />
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
 
-  <!-- ICONS -->
-  <link
-    rel="stylesheet"
-    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-  />
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
 
-  <!-- CSS -->
-  <link rel="stylesheet" href="style.css" />
-</head>
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+  </head>
   <body>
     <div class="top-line">
       <a href="index.html">VELLIORII</a>
     </div>
 
     <nav class="navbar">
-      <div class="nav-left">
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+
+      <div class="nav-left" id="nav-menu">
         <a href="index.html">Forside</a>
         <a href="alle-smykker.html">Se alle smykker</a>
         <a href="#">Salg</a>
@@ -37,9 +39,9 @@
 
       <div class="nav-right">
         <a href="handlekurv.html" class="cart-link">
-  <i class="fa-solid fa-bag-shopping"></i>
-  <span id="cart-count">0</span>
-</a>
+          <i class="fa-solid fa-bag-shopping"></i>
+          <span id="cart-count">0</span>
+        </a>
       </div>
     </nav>
 
@@ -49,14 +51,11 @@
       <div class="all-products-grid">
         <!-- LEGG NYE PRODUKTER INN HER -->
 
-        
         <a href="velina-hals.html" class="product-card simple">
           <img src="Images/Velina-halskjede2.jpg" alt="Halskjede" />
           <h3>VELINA HALSKJEDE</h3>
           <p>Se mer</p>
         </a>
-
-        
 
         <a href="torino-ore.html" class="product-card simple">
           <img src="Images/torino-ore.jpg" alt="Øredobber" />
@@ -69,7 +68,7 @@
           <h3>STELLA RING</h3>
           <p>Se mer</p>
         </a>
-        
+
         <a href="anello-armband.html" class="product-card simple">
           <img src="Images/Runde22.jpg" alt="Anello Classico" />
           <h3>ANELLO ARMBÅND</h3>
@@ -89,12 +88,10 @@
         </a>
 
         <a href="july-ring.html" class="product-card simple">
-  <img src="Images/july-ring6.jpg" alt="July ring" />
-  <h3>JULY RING</h3>
-  <p>Se mer</p>
-</a>
-
-
+          <img src="Images/july-ring6.jpg" alt="July ring" />
+          <h3>JULY RING</h3>
+          <p>Se mer</p>
+        </a>
 
         <a href="cesena-rosa-sommerfugl.html" class="product-card simple">
           <img src="Images/sommerfugl-lys-rosa.jpg" alt="Ring" />
@@ -102,7 +99,7 @@
           <p>Se mer</p>
         </a>
 
-         <a href="sorento.html" class="product-card simple">
+        <a href="sorento.html" class="product-card simple">
           <img src="Images/armband-perle-vase.jpg" alt="Armbånd" />
           <h3>SORENTO ARMBÅND</h3>
           <p>Se mer</p>
@@ -114,13 +111,11 @@
           <p>Se mer</p>
         </a>
 
-
         <a href="avenza-hals.html" class="product-card simple">
           <img src="Images/smykke-lys-sten.jpg" alt="Ring" />
           <h3>AVENZA HALSKJEDE</h3>
           <p>Se mer</p>
         </a>
-       
 
         <a href="aura.html" class="product-card simple">
           <img src="Images/produkt2.jpg" alt="Halskjede" />
@@ -134,13 +129,13 @@
           <p>Se mer</p>
         </a>
 
- <a href="pompeii-hals.html" class="product-card simple">
+        <a href="pompeii-hals.html" class="product-card simple">
           <img src="Images/Pompeii-halskjede.jpg" alt="Halskjede" />
           <h3>POMPEII HALSKJEDE</h3>
           <p>Se mer</p>
         </a>
-       
-       <a href="imperia-ring.html" class="product-card simple">
+
+        <a href="imperia-ring.html" class="product-card simple">
           <img src="Images/influencer-beige-gold-ring.jpg" alt="Ring" />
           <h3>IMPERIA RING</h3>
           <p>Se mer</p>
@@ -151,9 +146,6 @@
           <h3>CESENA BLÅ SOMMERFUGLRING</h3>
           <p>Se mer</p>
         </a>
-
-  
-      
 
         <a href="luna-ring.html" class="product-card simple">
           <img src="Images/Runde23.jpg" alt="Bracciale Luna" />
@@ -238,7 +230,7 @@
           <p>Se mer</p>
         </a>
 
-         <a href="aveiro.html" class="product-card simple">
+        <a href="aveiro.html" class="product-card simple">
           <img src="Images/aveiro.jpg" alt="Øredobber" />
           <h3>AVEIRO DROP ØRERINGER</h3>
           <p>Se mer</p>
@@ -255,9 +247,7 @@
           <h3>FARFALLA RING</h3>
           <p>Se mer</p>
         </a>
-
-       
-       
+      </div>
     </section>
     <script>
       function updateCartCount() {
@@ -284,5 +274,16 @@
       <p>Tlf: 123 45 678</p>
       <p>© 2026 Smykkebutikk</p>
     </footer>
+
+    <script>
+      const menuToggle = document.getElementById("menu-toggle");
+      const navMenu = document.getElementById("nav-menu");
+
+      if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", () => {
+          navMenu.classList.toggle("active");
+        });
+      }
+    </script>
   </body>
 </html>
