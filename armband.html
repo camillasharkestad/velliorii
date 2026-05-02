@@ -31,60 +31,7 @@
       </div>
     </section>
 
-    <footer class="footer-luxury">
-      <div class="footer-top">
-        <div class="footer-newsletter">
-          <h2>BLI EN VELLIORII INSIDER</h2>
-          <p>
-            Meld deg på vårt nyhetsbrev og få tidlig tilgang, inspirasjon og
-            eksklusive fordeler.
-          </p>
-
-          <form id="footer-newsletter-form" class="footer-form">
-            <input type="email" placeholder="E-postadresse" required />
-            <button type="submit">→</button>
-          </form>
-        </div>
-
-        <div class="footer-links">
-          <div>
-            <h3>KUNDESERVICE</h3>
-            <a href="#">FAQ</a>
-            <a href="#">Bytte & retur</a>
-            <a href="#">Frakt</a>
-            <a href="kontakt.html">Kontakt oss</a>
-          </div>
-
-          <div>
-            <h3>RESSURSER</h3>
-            <a href="#">Min konto</a>
-            <a href="#">Fraktpolicy</a>
-            <a href="#">Returpolicy</a>
-            <a href="#">Personvern</a>
-          </div>
-
-          <div>
-            <h3>OM OSS</h3>
-            <a href="om-oss.html">Om Velliorii</a>
-            <a href="#">Samarbeid</a>
-            <a href="alle-smykker.html">Våre smykker</a>
-          </div>
-        </div>
-      </div>
-
-      <div class="footer-brand">
-        <h1>VELLIORII</h1>
-      </div>
-
-      <div class="footer-bottom">
-        <p>© 2026 Velliorii</p>
-        <div class="footer-socials">
-          <a href="#">Instagram</a>
-          <a href="#">TikTok</a>
-        </div>
-      </div>
-    </footer>
-
+    <div id="footer"></div>
     <script>
       fetch("header.html")
         .then((response) => response.text())
@@ -151,5 +98,8 @@
 
       loadProducts();
     </script>
+
+    <script src="footer.js"></script>
+    <script src="newsletter.js"></script>
   </body>
 </html>

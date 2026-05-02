@@ -1270,3 +1270,195 @@ a {
     margin-right: 15px;
   }
 }
+/* =========================
+   FIX FOR HEADER.HTML
+   Brukes når header.html har top-line + navbar
+========================= */
+
+.top-line {
+  position: sticky;
+  top: 0;
+  z-index: 2000;
+
+  height: 60px;
+  padding: 0;
+
+  background-color: #ffffff;
+  color: #2f2a26;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  text-align: center;
+}
+
+.top-line a {
+  font-family: "Cormorant Garamond", serif;
+  font-weight: 300;
+  letter-spacing: 4px;
+  font-size: 28px;
+
+  color: #2f2a26;
+  text-decoration: none;
+  text-transform: uppercase;
+}
+
+.top-line a:visited,
+.top-line a:hover,
+.top-line a:active {
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.navbar {
+  position: sticky;
+  top: 60px;
+  z-index: 1500;
+
+  background-color: #eee6dc;
+
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+
+  padding: 18px 30px;
+}
+
+.nav-left {
+  display: flex;
+  justify-content: center;
+  gap: 40px;
+  flex: 1;
+  flex-wrap: wrap;
+}
+
+.nav-right {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  min-width: 80px;
+}
+
+.nav-right .cart-link {
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+.nav-right .cart-link:visited,
+.nav-right .cart-link:hover,
+.nav-right .cart-link:active {
+  color: #2f2a26;
+  text-decoration: none;
+}
+
+
+/* Mobilversjon for gammel header.html */
+
+@media (max-width: 768px) {
+  .top-line {
+    position: sticky;
+    top: 0;
+    z-index: 2000;
+
+    height: 60px;
+    padding: 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .top-line a {
+    font-size: 28px;
+    letter-spacing: 4px;
+    line-height: 1;
+  }
+
+  .navbar {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+
+    z-index: 2001;
+
+    height: 60px;
+    padding: 0 16px;
+
+    background: transparent;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .menu-toggle {
+    display: flex;
+    visibility: visible;
+
+    align-items: center;
+    justify-content: center;
+
+    width: 40px;
+    height: 40px;
+    padding: 0;
+
+    background: none;
+    border: none;
+
+    color: #2f2a26;
+    font-size: 28px;
+    cursor: pointer;
+  }
+
+  .nav-left {
+    display: none;
+
+    position: absolute;
+    top: 60px;
+    left: 0;
+
+    width: 100%;
+
+    flex-direction: column;
+    gap: 0;
+
+    text-align: center;
+    background-color: #eee6dc;
+    padding: 18px 0;
+  }
+
+  .nav-left.active {
+    display: flex;
+  }
+
+  .nav-left a {
+    padding: 14px 0;
+    font-size: 15px;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    min-width: 40px;
+  }
+
+  .nav-right .cart-link {
+    position: static !important;
+    top: auto !important;
+    right: auto !important;
+    left: auto !important;
+    transform: none !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px;
+
+    color: #2f2a26;
+    text-decoration: none;
+  }
+}
