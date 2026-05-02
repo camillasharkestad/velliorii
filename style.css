@@ -1328,3 +1328,18 @@ body {
     transform: translateY(-50%) !important;
   }
 }
+/* TVING HANDLEKURV TIL HØYRE PÅ MOBIL */
+@media (max-width: 768px) {
+  .cart-link {
+    position: fixed !important;
+    top: 30px !important;
+    right: 16px !important;
+    left: auto !important;
+    transform: translateY(-50%) !important;
+    z-index: 9999 !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+  }
+}
