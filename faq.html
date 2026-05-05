@@ -1,0 +1,223 @@
+<!doctype html>
+<html lang="no">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>FAQ - VELLIORII</title>
+
+    <!-- FONTS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400&family=Montserrat:wght@300;400;500&display=swap"
+      rel="stylesheet"
+    />
+
+    <!-- ICONS -->
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+    />
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="style.css" />
+
+    <style>
+      .faq-container {
+        max-width: 800px;
+        margin: 80px auto;
+        padding: 20px;
+      }
+
+      .faq-container h1 {
+        text-align: center;
+        margin-bottom: 40px;
+        font-family: "Cormorant Garamond", serif;
+      }
+
+      .faq-item {
+        border-bottom: 1px solid #ddd;
+        margin-bottom: 10px;
+      }
+
+      .faq-question {
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        padding: 18px 10px;
+        font-size: 16px;
+        font-family: "Montserrat", sans-serif;
+        cursor: pointer;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .faq-question i {
+        transition: transform 0.3s ease;
+      }
+
+      .faq-answer {
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        padding: 0 10px;
+      }
+
+      .faq-answer p {
+        margin: 10px 0 20px;
+        font-size: 15px;
+        line-height: 1.6;
+      }
+
+      .faq-item.active .faq-answer {
+        max-height: 200px;
+      }
+
+      .faq-item.active .faq-question i {
+        transform: rotate(180deg);
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header">
+      <button class="menu-toggle" id="menu-toggle">☰</button>
+      <a href="index.html" class="header-logo">VELLIORII</a>
+      <a href="handlekurv.html" class="cart-link">
+        <i class="fa-solid fa-bag-shopping"></i>
+        <span id="cart-count">0</span>
+      </a>
+    </header>
+
+    <nav class="navbar">
+      <div class="nav-left" id="nav-menu">
+        <a href="#">Nyeste kolleksjon</a>
+        <a href="alle-smykker.html">Se alle våre smykker</a>
+        <a href="#">Salg</a>
+        <a href="kontakt.html">Kontakt oss</a>
+      </div>
+    </nav>
+
+    <section class="faq-container">
+      <h1>Ofte stilte spørsmål</h1>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Hvor lang leveringstid har dere?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Vi sender vanligvis bestillinger innen 1–3 virkedager. Leveringstid
+            varierer basert på hvor du bor, men er som regel 3–7 virkedager.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Tilbyr dere gratis frakt?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Ja, vi tilbyr gratis frakt på alle bestillinger over et visst beløp.
+            Se i handlekurven for oppdatert informasjon.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Kan jeg returnere et smykke?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Ja, du har 14 dagers angrerett fra du mottar varen. Smykket må være
+            ubrukt og i original emballasje.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Hvordan tar jeg vare på smykkene mine?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Unngå kontakt med vann, parfyme og kjemikalier. Oppbevar smykkene i
+            en smykkeboks når de ikke er i bruk.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Hvilke materialer bruker dere?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Våre smykker er laget av høykvalitets materialer som rustfritt stål,
+            gullbelegg og naturlige steiner.
+          </p>
+        </div>
+      </div>
+
+      <div class="faq-item">
+        <button class="faq-question">
+          Hvordan kontakter jeg kundeservice?
+          <i class="fa-solid fa-chevron-down"></i>
+        </button>
+        <div class="faq-answer">
+          <p>
+            Du kan kontakte oss via kontaktskjemaet på nettsiden eller sende oss
+            en e-post. Vi svarer vanligvis innen 24 timer.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <div id="footer"></div>
+
+    <script>
+      const faqItems = document.querySelectorAll(".faq-item");
+
+      faqItems.forEach((item) => {
+        const button = item.querySelector(".faq-question");
+
+        button.addEventListener("click", () => {
+          item.classList.toggle("active");
+        });
+      });
+    </script>
+
+    <script>
+      function updateCartCount() {
+        let cart = JSON.parse(localStorage.getItem("cart")) || [];
+        let cartCount = document.getElementById("cart-count");
+
+        if (cartCount) {
+          cartCount.textContent = cart.length;
+        }
+      }
+
+      updateCartCount();
+
+      const menuToggle = document.getElementById("menu-toggle");
+      const navMenu = document.getElementById("nav-menu");
+
+      if (menuToggle && navMenu) {
+        menuToggle.addEventListener("click", () => {
+          navMenu.classList.toggle("active");
+        });
+      }
+    </script>
+
+    <script src="footer.js"></script>
+  </body>
+</html>

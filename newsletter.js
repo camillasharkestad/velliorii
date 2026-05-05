@@ -4,21 +4,13 @@ const newsletterEndpoint =
 document.addEventListener("submit", async (e) => {
   const form = e.target;
 
-  if (
-    form.id !== "footer-newsletter-form" &&
-    form.id !== "newsletter-form"
-  ) {
-    return;
-  }
+  // Kun footer-form
+  if (form.id !== "footer-newsletter-form") return;
 
   e.preventDefault();
 
   const emailInput = form.querySelector('input[type="email"]');
-
-  const message =
-    form.id === "footer-newsletter-form"
-      ? document.getElementById("footer-newsletter-message")
-      : document.getElementById("newsletter-message");
+  const message = document.getElementById("footer-newsletter-message");
 
   if (!emailInput || !message) return;
 
@@ -26,6 +18,7 @@ document.addEventListener("submit", async (e) => {
 
   if (!email) {
     message.textContent = "Skriv inn e-postadressen din.";
+    message.style.color = "red";
     return;
   }
 
@@ -42,10 +35,6 @@ document.addEventListener("submit", async (e) => {
     });
 
     const text = await res.text();
-
-    console.log("STATUS:", res.status);
-    console.log("RESPONSE:", text);
-
     let data = {};
 
     try {
@@ -53,19 +42,23 @@ document.addEventListener("submit", async (e) => {
     } catch {}
 
     if (!res.ok) {
-      message.textContent = data.error || text || "Noe gikk galt.";
+      message.textContent = data.error || "Noe gikk galt.";
+      message.style.color = "red";
       return;
     }
 
     if (data.alreadyExists) {
-      message.textContent = "Du er allerede påmeldt nyhetsbrevet.";
+      message.textContent = "Du er allerede påmeldt.";
       return;
     }
 
-    message.textContent = "Takk! Du er nå påmeldt nyhetsbrevet.";
+    message.textContent = "Takk! Du er nå påmeldt ✨";
+    message.style.color = "green";
     form.reset();
+
   } catch (err) {
     console.error("FETCH ERROR:", err);
     message.textContent = "Fikk ikke kontakt med serveren.";
+    message.style.color = "red";
   }
 });
