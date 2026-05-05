@@ -29,7 +29,10 @@
     <section class="product-page">
       <div class="product-page-container">
         <div class="product-page-image">
-          <img src="Images/butterfly-hoops.jpg" alt="Butterfly hoops" />
+          <img
+            src="https://res.cloudinary.com/ddr47lhck/image/upload/butterfly-hoops2_r2lo2e.jpg"
+            alt="Butterfly hoops"
+          />
         </div>
 
         <div class="product-page-info">
@@ -60,7 +63,11 @@
             id="buy-button"
             class="buy-button"
             onclick="
-              addToCart('Butterfly hoops', 449, 'Images/butterfly-hoops.jpg')
+              addToCart(
+                'Butterfly hoops',
+                449,
+                'https://res.cloudinary.com/ddr47lhck/image/upload/butterfly-hoops2_r2lo2e.jpg',
+              )
             "
           >
             Legg i handlekurv
@@ -69,7 +76,7 @@
       </div>
     </section>
 
-  <div id="footer"></div>
+    <div id="footer"></div>
 
     <script>
       fetch("header.html")
@@ -204,7 +211,6 @@
       loadProduct();
     </script>
     <script src="footer.js"></script>
-<script src="newsletter.js"></script>
-
+    <script src="newsletter.js"></script>
   </body>
 </html>
