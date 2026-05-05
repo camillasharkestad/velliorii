@@ -187,9 +187,9 @@ a {
 
 .hero {
   height: 500px;
-  background-image: url("Images/Smykker-banner.jpg");
+  background-image: url("https://res.cloudinary.com/ddr47lhck/butterflycharmring2_rmyanm.jpg");
   background-size: cover;
-  background-position: center;
+  background-position: 10% 90%;
   background-repeat: no-repeat;
   background-attachment: fixed;
 }
