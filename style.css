@@ -1360,7 +1360,7 @@ a {
   .top-line {
     position: sticky;
     top: 0;
-    z-index: 2000;
+    z-index: 3000;
 
     height: 60px;
     padding: 0;
@@ -1368,42 +1368,50 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
+
+    background-color: #ffffff;
   }
 
   .top-line a {
+    position: relative;
+    z-index: 3002;
+
     font-size: 28px;
     letter-spacing: 4px;
     line-height: 1;
   }
 
   .navbar {
-    position: fixed;
-    top: 0;
-    left: 0;
-    right: 0;
+    position: sticky;
+    top: 60px;
+    z-index: 2500;
 
-    z-index: 2001;
+    height: auto;
+    padding: 0;
 
-    height: 60px;
-    padding: 0 16px;
-
-    background: transparent;
+    background-color: #eee6dc;
 
     display: flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: center;
   }
 
   .menu-toggle {
     display: flex;
     visibility: visible;
 
-    align-items: center;
-    justify-content: center;
+    position: absolute;
+    left: 16px;
+    top: -50px;
+
+    z-index: 3003;
 
     width: 40px;
     height: 40px;
     padding: 0;
+
+    align-items: center;
+    justify-content: center;
 
     background: none;
     border: none;
@@ -1412,6 +1420,54 @@ a {
     font-size: 28px;
     cursor: pointer;
   }
+
+  .nav-left {
+    display: none;
+
+    width: 100%;
+
+    flex-direction: column;
+    gap: 0;
+
+    text-align: center;
+    background-color: #eee6dc;
+    padding: 18px 0;
+  }
+
+  .nav-left.active {
+    display: flex;
+  }
+
+  .nav-left a {
+    padding: 14px 0;
+    font-size: 15px;
+  }
+
+  .nav-right {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+
+    position: absolute;
+    right: 16px;
+    top: -50px;
+
+    z-index: 3003;
+  }
+
+  .nav-right .cart-link {
+    position: static !important;
+    transform: none !important;
+
+    display: flex !important;
+    align-items: center !important;
+    justify-content: center !important;
+    gap: 6px;
+
+    color: #2f2a26;
+    text-decoration: none;
+  }
+}
 
   .nav-left {
     display: none;
